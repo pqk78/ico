@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
+const rimraf = require('rimraf');
+
 const convert = require('./utils/convert');
 
 const createWindow = () => {
@@ -21,7 +23,10 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
+    rimraf.sync('tmp', {preserveRoot: true});
+    if (process.platform !== 'darwin') { 
+        app.quit();
+    };
 });
 
 app.on('activate', () => {

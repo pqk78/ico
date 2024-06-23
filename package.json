@@ -23,6 +23,7 @@
     "electron": "^31.0.2",
     "liquidjs": "^10.14.0",
     "path": "^0.12.7",
+    "rimraf": "^5.0.7",
     "sharp": "^0.33.4"
   },
   "dependencies": {
