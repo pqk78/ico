@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+		<title>Image Converter and Optimizer</title>
+		<link rel="stylesheet" href="./css/style.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Image Converter and Optimizer</h1>
+			<form class="form">
+				<div class="form__drag-area" id="form__drag-area" aria-hidden="true">
+					<span class="form__drag-area__label">Drag files here to upload</span>
+				</div>
+				<p>
+					<label for="file" class="form__label">Upload files:</label>
+					<input type="file" class="form_input--file" id="file">
+				</p>
+				<details>
+					<summary>Options</summary>
+					<fieldset class="form__fieldset">
+						<legend class="form__fieldset__legend">Formats</legend>
+					</fieldset>
+					<fieldset class="form__fieldset">
+						<legend class="form__fieldset__legend">Scale</legend>
+					</fieldset>
+					<fieldset class="form__fieldset">
+						<legend class="form__fieldset__legend">Resize</legend>
+					</fieldset>
+				</details>
+				<p>
+					<button class="form__submit">Convert &raquo;</button>
+				</p>
+			</form>
+		</div>
+		<script src="./js/render.js"></script>
+	</body>
+</html>

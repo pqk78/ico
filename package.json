@@ -1,0 +1,31 @@
+{
+  "name": "pqk.image-optimizer",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "main": "main.js",
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "description": "",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^31.0.2",
+    "liquidjs": "^10.14.0",
+    "path": "^0.12.7",
+    "sharp": "^0.33.4"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}

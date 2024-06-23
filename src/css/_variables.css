@@ -1,0 +1,25 @@
+:root {
+    --biscay-bay: #067a89;
+    --crow: #160413;
+    --magenta: #f44eb7;
+    --snowman: #fefafc;
+    --thistle: #32062A;
+    --vaporwave: #2fe1f9;
+    
+    --body-background: var(--snowman);
+    --body-color: var(--crow);
+    --link-color: var(--biscay-bay);
+    --heading-color: var(--thistle);
+    --heading-gradient: linear-gradient(35deg, var(--thistle), var(--biscay-bay));
+
+    @media (prefers-color-scheme: dark) {
+        --body-background: var(--crow);
+        --body-color: var(--snowman);
+        --link-color: var(--vaporwave);
+        --heading-color: var(--magenta);
+        --heading-gradient: linear-gradient(35deg, var(--magenta), var(--vaporwave));
+    }
+    
+    --font-stack-body: quicksand, sans-serif;
+    --font-stack-headline: anton, serif;
+}

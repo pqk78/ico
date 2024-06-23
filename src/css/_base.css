@@ -1,0 +1,29 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--body-background);
+    color: var(--body-color);
+    font-family: var(--font-stack-body);
+    font-size: clamp(1.125rem, 1.25vw, 1.75rem);
+    margin: 0;
+}
+
+h1,
+.page-title {
+    background-clip: text;
+    background-image: var(--heading-gradient);
+    color: transparent;
+    font-family: var(--font-stack-headline);
+    font-size: clamp(1.625rem, 4.5vw, 6.75rem);
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.container {
+    margin-inline: auto;
+    width: min(90%, 100% - 2rem, 50rem);
+}
