@@ -1,0 +1,62 @@
+<div class="form-container">
+    <form class="form">
+        <div class="drag-area" id="drag-area" aria-hidden="true">
+            <span class="drag-area-label">Drag files here to upload or</span>
+        </div>
+        <p><label for="file" class="label">upload files manually:</label></p>
+        <p><input type="file" class="form_input--file" id="file"></p>
+        <details>
+            <summary>Options</summary>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Formats</legend>
+                {% for format in settings.formats %}
+                    <label for="formats--{{ format }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format }}" value="{{ format }}">
+                        <span class="checkbox-text">{{ format |  replace: 'jpg', 'jpeg' | upcase }}</span>
+                    </label>
+                {% endfor %}
+            </fieldset>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Scale</legend>
+                {% for size in settings.scale.options %}
+                    {% assign value = size.value %}
+                    {% if size.selected %}
+                        {% assign checked = 'checked' %}
+                    {% else %}
+                        {% assign checked = '' %}                        
+                    {% endif %}
+                    <label for="scale--{{ value }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ value }}" value="{{ value }}" {{ checked }}>
+                        <span class="checkbox-text">{{ value | replace: 'auto', 'Original size' }}{% unless value == "auto" %}px{% endunless %}</span>
+                    </label>
+                {% endfor %}
+            </fieldset>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Resize</legend>
+                {% for size in settings.resize.options %}
+                    {% assign value = size.value %}
+                    {% if size.selected %}
+                        {% assign checked = 'checked' %}
+                    {% else %}
+                        {% assign checked = '' %}                        
+                    {% endif %}
+                    <label for="resize--{{ value }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="size" id="resize--{{ value }}" value="{{ value }}" {{ checked }}>
+                        <span class="checkbox-text">{{ value }}</span>
+                    </label>
+                {% endfor %}
+            </fieldset>
+            <div class="input-container">
+                <label for="custom-sizes" class="input-label">Custom Sizes</label><br>
+                <input type="text" class="input" id="custom-sizes" name="custom_sizes" aria-describedby="custom-sizes--help">
+                <span class="input-help" id="custom-sizes--help">Enter a set of widths or dimensions in pixels separated by commas<br>
+                (e.g. <code>800,650x500,900</code></span>
+            </div>
+        </details>
+        <p><button class="submit">Convert &raquo;</button></p>
+    </form>
+    <div class="form-output">
+        <div class="input"></div>
+        <div class="output"></div>
+    </div>
+</div>

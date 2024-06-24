@@ -1,0 +1,11 @@
+.preview {
+    border: 2px solid var(--body-color);
+    padding: 1rem;
+    text-align: center;
+
+    .preview-image {
+        height: auto;
+        margin: 0 0 1rem;
+        width: 200px;
+    }
+}

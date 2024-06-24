@@ -1,0 +1,79 @@
+{
+    "settings": {
+        "formats": [
+            "avif",
+            "jpg",
+            "png",
+            "webp"
+        ],
+        "scale": {
+            "options": [
+                {
+                    "value": 480,
+                    "selected": false
+                },
+                {
+                    "value": 720,
+                    "selected": false
+                },
+                {
+                    "value": 1080,
+                    "selected": false
+                },
+                {
+                    "value": 1920,
+                    "selected": false
+                },
+                {
+                    "value": "auto",
+                    "selected": true
+                }
+            ]
+        },
+        "resize": {
+            "options": [
+                {
+                    "value": "400x300",
+                    "selected": false
+                },
+                {
+                    "value": "600x600",
+                    "selected": false
+                },
+                {
+                    "value": "720x480",
+                    "selected": false
+                },
+                {
+                    "value": "1200x800",
+                    "selected": false
+                },
+                {
+                    "value": "1920x1080",
+                    "selected": false
+                }
+            ]
+        },
+        "temp_files": {
+            "schedule": {
+                "value": "onclose",
+                "options": {
+                    "onclose": "Each time I close the window",
+                    "10": "After 10 days",
+                    "30": "After 30 days",
+                    "manual": "Do not delete. I will delete them manually."
+                }
+            }
+        },
+        "theme": {
+            "mode": {
+                "value": "system",
+                "options": {
+                    "light": "Light Mode",
+                    "dark": "Dark Mode",
+                    "system": "Use system settings"
+                }
+            }
+        }
+    }
+}

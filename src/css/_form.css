@@ -1,0 +1,33 @@
+.form {
+    .checkbox {
+        accent-color: var(--link-color);
+    }
+
+    .checkbox-label {
+        display: block;
+    }
+
+    .submit {
+        background-color: var(--link-color);
+        border: unset;
+        color: var(--body-background);
+        cursor: pointer;
+        font-family: var(--font-stack-body);
+        font-size: 1.125rem;
+        padding: .625rem 2rem;
+        text-transform: uppercase;
+    }
+}
+
+.form-output {
+    .output {
+        display: flex;
+        flex-flow: wrap;
+        gap: 4rem;
+        padding: 4rem 0;
+
+        p {
+            margin: 0;
+        }
+    }
+}
