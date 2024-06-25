@@ -72,7 +72,7 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-    rimraf.sync('tmp', { preserveRoot: true });
+    rimraf.sync(path.join(process.cwd(), 'tmp'), { preserveRoot: true });
     if (process.platform !== 'darwin') {
         app.quit();
     };
