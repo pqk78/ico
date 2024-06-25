@@ -8,8 +8,8 @@
     "make": "electron-forge make"
   },
   "main": "main.js",
-  "keywords": [],
-  "author": "",
+  "keywords": ["image", "avif", "jpeg", "webp", "optimization"],
+  "author": "Maz Planchak",
   "license": "GPL-3.0-only",
   "description": "",
   "devDependencies": {
