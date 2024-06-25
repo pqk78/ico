@@ -5,6 +5,10 @@ module.exports = {
   packagerConfig: {
     asar: true,
   },
+  packagerConfig: {
+    asar: true,
+    icon: './src/images/ico-logo'
+  },
   rebuildConfig: {},
   makers: [
     {
@@ -14,6 +18,12 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+    },
+    {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        icon: './src/images/ico-logo.icns',
+      }
     },
     {
       name: '@electron-forge/maker-deb',
