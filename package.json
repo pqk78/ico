@@ -1,5 +1,6 @@
 {
   "name": "pqk.image-optimizer",
+  "productName": "Image Converter and Optimizer",
   "version": "1.0.0",
   "scripts": {
     "start": "electron-forge start",

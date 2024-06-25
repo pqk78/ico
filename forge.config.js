@@ -1,13 +1,17 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const path = require('node:path');
 
 module.exports = {
   packagerConfig: {
     asar: true,
-  },
-  packagerConfig: {
-    asar: true,
-    icon: './src/images/ico-logo'
+    icon: './src/images/ico-logo',
+    
+    extraResource: [
+      './src/templates/index.liquid',
+      './src/templates/partials/form.liquid',
+      './src/templates/partials/preview.liquid'
+    ]
   },
   rebuildConfig: {},
   makers: [
@@ -22,6 +26,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-dmg',
       config: {
+        name: 'ICO',
         icon: './src/images/ico-logo.icns',
       }
     },

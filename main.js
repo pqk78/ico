@@ -36,13 +36,16 @@ const convert = async (event, image, options) => {
 
 const liquid = async (event, file, options = {}) => {
     const engine = new Liquid({
-        root: ['./src/templates', './src/templates/layouts', './src/templates/partials'],
+        root: [
+            process.resourcesPath,
+            path.join(process.cwd(), 'src/templates'),
+            path.join(process.cwd(), 'src/templates/layouts'),
+            path.join(process.cwd(), 'src/templates/partials'),
+        ],
         extname: '.liquid'
     });
 
-    console.log(file, options);
-
-    return await engine.renderFile(file, { options });
+    return await engine.renderFile(file, { options, base_path: process.cwd() });
 }
 
 const createWindow = () => {
@@ -52,10 +55,14 @@ const createWindow = () => {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
+        protocol: 'file',
         icon: './src/images/ico-logo.png'
     });
 
+    // console.log(ROOT.ASSETS)
+
     win.loadFile('./src/index.html');
+
 }
 
 app.whenReady().then(() => {
