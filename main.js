@@ -2,15 +2,13 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('node:fs');
 const { Liquid } = require('liquidjs');
 const path = require('node:path');
-const sharp = require('sharp');
 const rimraf = require('rimraf');
+const sharp = require('sharp');
+const { tmpdir } = require('node:os');
+
+const tmpDir = path.join(tmpdir(), 'com.panqike/ico');
 
 const convert = async (event, image, options) => {
-    let dir = path.join(process.cwd(), 'tmp');
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
-
     let outmeta = {};
 
     let imagePath = outmeta.path = path.parse(image);
@@ -20,14 +18,14 @@ const convert = async (event, image, options) => {
     if (options.resize) {
         let suffix = options.resize.length == 1 ? `.${options.resize[0]}w` : `.${options.resize.join('x')}`;
         let outFileName = outmeta.fileName = `${imagePath.name}${imagePath.ext}${suffix}${ext}`;
-        let outFilePath = outmeta.filePath = path.join(dir, outFileName);
+        let outFilePath = outmeta.filePath = path.join(tmpDir, outFileName);
         outmeta.info = await sharp(image)
             .resize(...options.resize)
             .toFile(outFilePath);
     }
     else {
         let outFileName = outmeta.fileName = `${imagePath.name}${imagePath.ext}${ext}`;
-        let outFilePath = outmeta.filePath = path.join(dir, outFileName);
+        let outFilePath = outmeta.filePath = path.join(tmpDir, outFileName);
         outmeta.info = await sharp(image).toFile(outFilePath);
     }
 
@@ -48,6 +46,13 @@ const liquid = async (event, file, options = {}) => {
     return await engine.renderFile(file, { options, base_path: process.cwd() });
 }
 
+const createTempDir = () => {
+    console.log(tmpDir);
+    fs.mkdir(tmpDir, {recursive: true}, err => {
+        console.error('e 51:', err);
+    })
+}
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
@@ -59,8 +64,6 @@ const createWindow = () => {
         icon: './src/images/ico-logo.png'
     });
 
-    // console.log(ROOT.ASSETS)
-
     win.loadFile('./src/index.html');
 
 }
@@ -69,10 +72,11 @@ app.whenReady().then(() => {
     ipcMain.handle('convert', convert);
     ipcMain.handle('liquid', liquid);
     createWindow();
+    createTempDir();
 });
 
 app.on('window-all-closed', () => {
-    rimraf.sync(path.join(process.cwd(), 'tmp'), { preserveRoot: true });
+    rimraf.sync(tmpDir, { preserveRoot: true });
     if (process.platform !== 'darwin') {
         app.quit();
     };
@@ -80,6 +84,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
+        createTempDir();
+        createWindow();
     }
 });
