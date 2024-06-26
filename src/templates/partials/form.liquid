@@ -16,7 +16,7 @@
                         {% assign checked = '' %}                        
                     {% endif %}
                     <label for="formats--{{ format[0] }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format[0] }}" value="{{ format }}" {{ checked }}>
+                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format[0] }}" value="{{ format[0] }}" {{ checked }}>
                         <span class="checkbox-text">{{ format[0] |  replace: 'jpg', 'jpeg' | upcase }}</span>
                     </label>
                 {% endfor %}
@@ -31,7 +31,7 @@
                     {% endif %}
                     <label for="scale--{{ size[0] }}" class="checkbox-label">
                         <input class="checkbox" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}" {{ checked }}>
-                        <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[1] == "auto" %}px{% endunless %}</span>
+                        <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[0] == "auto" %}px{% endunless %}</span>
                     </label>
                 {% endfor %}
             </fieldset>
