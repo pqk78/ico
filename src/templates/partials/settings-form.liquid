@@ -1,0 +1,103 @@
+<form class="form">
+    <h2 class="section-heading">Image Options</h2>
+    <fieldset>
+        <legend>File Formats</legend>
+        {% for format in options.settings.formats %}
+            {% if format[1] %}
+                {% assign checked = 'checked' %}
+            {% else %}
+                {% assign checked = '' %}
+            {% endif %}
+            <div class="form-item">
+                <div class="item-name">{{ format[0] |  replace: 'jpg' , 'jpeg' |  upcase }}</div>
+                <div class="item-default">
+                    <label for="format-{{ format[0] }}-selected" class="default-label">
+                        <input type="checkbox" class="selected" id="format-{{ format[0] }}-selected" name="format-{{ format[0] }}-selected" {{checked}}>
+                        selected by default
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <fieldset>
+        <legend>Scale</legend>
+        {% for size in options.settings.scale %}
+            {% if size[1] %}
+                {% assign checked = 'checked' %}
+            {% else %}
+                {% assign checked = '' %}
+            {% endif %}
+            <div class="form-item">
+                {% if size[0] == 'auto' %}
+                    <div class="item-name">Original size</div>
+                {% else %}
+                    <div class="item-name"><input type="text" name="scale-{{ forloop.index }}" value="{{ size[0] }}"></div>
+                {% endif %}
+                <div class="item-default">
+                    <label for="size-{{ forloop.index }}-selected" class="default-label">
+                        <input type="checkbox" id="size-{{ forloop.index }}-selected" name="size-{{ forloop.index }}-selected" {{checked}}>
+                        selected by default
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+        <button class="add" id="add-scale">Add another size</button>
+    </fieldset>
+    <fieldset>
+        <legend>Resize</legend>
+        {% for size in options.settings.resize %}
+            {% if size[1] %}
+                {% assign checked = 'checked' %}
+            {% else %}
+                {% assign checked = '' %}
+            {% endif %}
+            <div class="form-item">
+                {% if size[0] == 'auto' %}
+                    <div class="item-name">Original size</div>
+                {% else %}
+                    <div class="item-name"><input type="text" name="resize-{{ forloop.index }}" value="{{ size[0] }}"></div>
+                {% endif %}
+                <div class="item-default">
+                    <label for="size-{{ forloop.index }}-selected" class="default-label">
+                        <input type="checkbox" id="size-{{ forloop.index }}-selected" name="size-{{ forloop.index }}-selected" {{checked}}>
+                        selected by default
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+        <button class="add" id="add-scale">Add another size</button>
+    </fieldset>
+    <h2 class="section-heading">General Settings</h2>
+    <fieldset>
+        <legend>Color Mode</legend>
+        {% for option in options.settings.theme.mode.options %}
+            {% if option[0] == options.settings.theme.mode.value %}
+                {% assign checked = 'checked' %}
+            {% else %}
+                {% assign checked = '' %}
+            {% endif %}
+            <div class="form-item">
+                <label for="color-mode-{{ option[0] }}" class="radio-label">
+                    <input type="radio" class="radio" name="color-mode" value="{{ option[0] }}" id="color-mode-{{ option[0] }}" {{ checked }}>
+                    {{ option[1] }}
+                </label>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <fieldset>
+        <legend>When to delete temporary files</legend>
+        {% for option in options.settings.temp_files.schedule.options %}
+            {% if option[0] == options.settings.temp_files.schedule.value %}
+                {% assign checked = 'checked' %}
+            {% else %}
+                {% assign checked = '' %}
+            {% endif %}
+            <div class="form-item">
+                <label for="temp-files-{{ option[0] }}" class="radio-label">
+                    <input type="radio" class="radio" name="temp-files" value="{{ option[0] }}" id="temp-files-{{ option[0] }}" {{ checked }}>
+                    {{ option[1] }}
+                </label>
+            </div>
+        {% endfor %}
+    </fieldset>
+</form>
