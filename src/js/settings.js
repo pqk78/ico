@@ -7,7 +7,6 @@ colors.forEach(color => {
         colors.forEach(c => {
             c.checked && (value = c.value);
         });
-        console.log(value);
         utils.updateSettings('settings.theme.mode.value', value);
         utils.updateColorMode(value);
     })

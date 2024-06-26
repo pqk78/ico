@@ -10,8 +10,6 @@ class Storage {
         const userDataPath = (electron.app || electron.remote.app).getPath('userData');
         this.path = path.join(userDataPath, 'settings.json');
         this.settings = this.read(this.path);
-
-        console.log(this.path)
     }
 
     set(key, val) {
