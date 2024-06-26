@@ -10,39 +10,42 @@
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Formats</legend>
                 {% for format in settings.formats %}
-                    <label for="formats--{{ format }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format }}" value="{{ format }}">
-                        <span class="checkbox-text">{{ format |  replace: 'jpg', 'jpeg' | upcase }}</span>
+                    {% if format[1] %}
+                        {% assign checked = 'checked' %}
+                    {% else %}
+                        {% assign checked = '' %}                        
+                    {% endif %}
+                    <label for="formats--{{ format[0] }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format[0] }}" value="{{ format }}" {{ checked }}>
+                        <span class="checkbox-text">{{ format[0] |  replace: 'jpg', 'jpeg' | upcase }}</span>
                     </label>
                 {% endfor %}
             </fieldset>
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Scale</legend>
-                {% for size in settings.scale.options %}
-                    {% assign value = size.value %}
-                    {% if size.selected %}
+                {% for size in settings.scale %}
+                    {% if size[1] %}
                         {% assign checked = 'checked' %}
                     {% else %}
                         {% assign checked = '' %}                        
                     {% endif %}
-                    <label for="scale--{{ value }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ value }}" value="{{ value }}" {{ checked }}>
-                        <span class="checkbox-text">{{ value | replace: 'auto', 'Original size' }}{% unless value == "auto" %}px{% endunless %}</span>
+                    <label for="scale--{{ size[0] }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}" {{ checked }}>
+                        <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[1] == "auto" %}px{% endunless %}</span>
                     </label>
                 {% endfor %}
             </fieldset>
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Resize</legend>
-                {% for size in settings.resize.options %}
-                    {% assign value = size.value %}
-                    {% if size.selected %}
+                {% for size in settings.resize %}
+                    {% if size[1] %}
                         {% assign checked = 'checked' %}
                     {% else %}
                         {% assign checked = '' %}                        
                     {% endif %}
-                    <label for="resize--{{ value }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="size" id="resize--{{ value }}" value="{{ value }}" {{ checked }}>
-                        <span class="checkbox-text">{{ value }}</span>
+                    <label for="scale--{{ size[0] }}" class="checkbox-label">
+                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}" {{ checked }}>
+                        <span class="checkbox-text">{{ size[0]}}</span>
                     </label>
                 {% endfor %}
             </fieldset>
