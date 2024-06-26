@@ -6,7 +6,7 @@ const rimraf = require('rimraf');
 const sharp = require('sharp');
 const { tmpdir } = require('node:os');
 
-const tmpDir = path.join(tmpdir(), 'com.panqike/ico');
+const tmpDir = path.join(process.cwd(), 'tmp');
 
 const convert = async (event, image, options) => {
     let outmeta = {};
@@ -47,10 +47,9 @@ const liquid = async (event, file, options = {}) => {
 }
 
 const createTempDir = () => {
-    console.log(tmpDir);
-    fs.mkdir(tmpDir, {recursive: true}, err => {
-        console.error('e 51:', err);
-    })
+  fs.mkdir(tmpDir, { recursive: true }, err => {
+    console.error('e 51:', err);
+  })
 }
 
 const createWindow = () => {
