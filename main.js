@@ -6,7 +6,10 @@ const rimraf = require('rimraf');
 const sharp = require('sharp');
 const { tmpdir } = require('node:os');
 
+const Storage = require('./src/utils/storage');
+
 const tmpDir = path.join(process.cwd(), 'tmp');
+const storage = new Storage();
 
 const convert = async (event, image, options) => {
   let outmeta = {};
@@ -32,7 +35,7 @@ const convert = async (event, image, options) => {
   return outmeta;
 }
 
-const liquid = async (event, file, options = {}) => {
+const liquid = async (event, file, options = storage.getAll()) => {
   const engine = new Liquid({
     root: [
       process.resourcesPath,
@@ -44,6 +47,10 @@ const liquid = async (event, file, options = {}) => {
   });
 
   return await engine.renderFile(file, { options, base_path: process.cwd() });
+}
+
+const updateSettings = (event, key, value) => {
+    storage.set(key, value);
 }
 
 const createTempDir = () => {
@@ -122,15 +129,18 @@ const createWindow = () => {
   ];
 
   const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
+  Menu.setApplicationMenu(menu);
 
-  nativeTheme.themeSource = 'dark';
+  // nativeTheme.themeSource = storage.get('settings.theme.mode.value');
+  console.log(storage.get('settings.theme.mode.value'));
+
+  ipcMain.on('update-settings', updateSettings);
+
+  ipcMain.on('update-color-mode', (event, mode) => {
+    nativeTheme.themeSource = mode;
+  })
 
   win.loadFile('./src/index.html');
-}
-
-const openSettings = () => {
-  console.log('opening settings');
 }
 
 app.whenReady().then(() => {

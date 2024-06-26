@@ -8,7 +8,13 @@
     "make": "electron-forge make"
   },
   "main": "main.js",
-  "keywords": ["image", "avif", "jpeg", "webp", "optimization"],
+  "keywords": [
+    "image",
+    "avif",
+    "jpeg",
+    "webp",
+    "optimization"
+  ],
   "author": "Maz Planchak",
   "license": "Apache-2.0",
   "description": "A desktop app for image conversion and optimization",
@@ -27,6 +33,7 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
     "liquidjs": "^10.14.0",
+    "lodash": "^4.17.21",
     "node-addon-api": "^8.0.0",
     "node-gyp": "^10.1.0",
     "path": "^0.12.7",
