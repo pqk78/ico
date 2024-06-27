@@ -79,7 +79,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     },
     protocol: 'file',
-    icon: './src/images/ico-logo.png'
+    icon: './src/images/logo-dark.svg.1024x1024.png'
   });
 
   const isMac = process.platform === 'darwin'

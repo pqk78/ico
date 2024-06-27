@@ -5,7 +5,7 @@ const path = require('node:path');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/images/ico-logo',
+    icon: './src/images/logo-dark',
     
     extraResource: [
       './src/templates/index.liquid',
@@ -27,7 +27,7 @@ module.exports = {
       name: '@electron-forge/maker-dmg',
       config: {
         name: 'ICO',
-        icon: './src/images/ico-logo.icns',
+        icon: './src/images/logo-dark.icns',
       }
     },
     {
