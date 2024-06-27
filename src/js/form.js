@@ -10,7 +10,7 @@ drag_area && drag_area.addEventListener('drop', e => {
 form && form.addEventListener('submit', async e => {
     e.preventDefault();
     let image = file.files[0]?.path;
-    if (true) {
+    if (image) {
         let data = new FormData(form);
         let formats = data.getAll('format');
         let custom_sizes = data.get('custom_sizes').replaceAll(' ', '').replaceAll('px', '').split(',').filter(e => e);
