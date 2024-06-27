@@ -1,10 +1,10 @@
-const { app, BrowserWindow, ipcMain, Menu, nativeTheme } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, nativeTheme, net, protocol, remote } = require('electron');
 const fs = require('node:fs');
 const { Liquid } = require('liquidjs');
 const path = require('node:path');
 const rimraf = require('rimraf');
 const sharp = require('sharp');
-const { tmpdir } = require('node:os');
+const url = require('node:url');
 
 const Storage = require('./src/utils/storage');
 
@@ -60,7 +60,7 @@ const liquid = async (event, file, options = storage.getAll()) => {
 }
 
 const updateSettings = (event, key, value) => {
-    storage.set(key, value);
+  storage.set(key, value);
 }
 
 const createTempDir = () => {
@@ -68,6 +68,17 @@ const createTempDir = () => {
     console.error('e 51:', err);
   })
 }
+
+const systemfileProtocol = "systemfile";
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: systemfileProtocol,
+    privileges: {
+      bypassCSP: true
+    }
+  },
+]);
+
 
 const createWindow = () => {
 
@@ -141,8 +152,7 @@ const createWindow = () => {
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu);
 
-  // nativeTheme.themeSource = storage.get('settings.theme.mode.value');
-  console.log(storage.get('settings.theme.mode.value'));
+  nativeTheme.themeSource = storage.get('settings.theme.mode.value');
 
   ipcMain.on('update-settings', updateSettings);
 
@@ -156,6 +166,11 @@ const createWindow = () => {
 app.whenReady().then(() => {
   ipcMain.handle('convert', convert);
   ipcMain.handle('liquid', liquid);
+  protocol.handle(systemfileProtocol, request => {
+    const filePath = request.url.slice('systemfile://'.length)
+    return net.fetch(`file://${filePath}`);
+  })
+
   createWindow();
   createTempDir();
 });
