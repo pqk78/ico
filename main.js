@@ -7,10 +7,13 @@ const sharp = require('sharp');
 const url = require('node:url');
 
 const Storage = require('./src/utils/storage');
+const defaultSettings = require('./src/utils/settings.json');
+
+
 
 const tmpDir = path.join((app || electron.remote.app).getPath('userData'), 'tmp');
 
-const storage = new Storage();
+const storage = new Storage('settings', defaultSettings);
 
 const convert = async (event, image, options) => {
   let outmeta = {};
@@ -36,7 +39,7 @@ const convert = async (event, image, options) => {
   return outmeta;
 }
 
-const liquid = async (event, file, options = storage.getAll()) => {
+const liquid = async (event, file, options = storage.getAll) => {
   const engine = new Liquid({
     root: [
       process.resourcesPath,
