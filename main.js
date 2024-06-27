@@ -40,8 +40,6 @@ const liquid = async (event, file, options = storage.getAll()) => {
     root: [
       process.resourcesPath,
       path.join(process.cwd(), 'src/templates'),
-      path.join(process.cwd(), 'src/templates/layouts'),
-      path.join(process.cwd(), 'src/templates/partials'),
     ],
     extname: '.liquid'
   });

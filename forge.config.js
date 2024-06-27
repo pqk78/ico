@@ -8,10 +8,13 @@ module.exports = {
     icon: './src/images/logo-dark',
     
     extraResource: [
+      './src/templates/convert-form.liquid',
+      './src/templates/help.liquid',
       './src/templates/index.liquid',
-      './src/templates/partials/form.liquid',
-      './src/templates/partials/preview.liquid'
-    ]
+      './src/templates/preview.liquid',
+      './src/templates/settings-form.liquid',
+      './src/templates/settings.liquid',
+    ],
   },
   rebuildConfig: {},
   makers: [
