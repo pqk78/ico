@@ -8,7 +8,8 @@ const { tmpdir } = require('node:os');
 
 const Storage = require('./src/utils/storage');
 
-const tmpDir = path.join(process.cwd(), 'tmp');
+const tmpDir = path.join((app || electron.remote.app).getPath('userData'), 'tmp');
+
 const storage = new Storage();
 
 const convert = async (event, image, options) => {
