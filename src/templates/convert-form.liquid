@@ -13,7 +13,7 @@
                     {% if format[1] %}
                         {% assign checked = 'checked' %}
                     {% else %}
-                        {% assign checked = '' %}                        
+                        {% assign checked = '' %}
                     {% endif %}
                     <label for="formats--{{ format[0] }}" class="checkbox-label">
                         <input class="checkbox" type="checkbox" name="format" id="formats--{{ format[0] }}" value="{{ format[0] }}" {{ checked }}>
@@ -55,6 +55,19 @@
                 <span class="input-help" id="custom-sizes--help">Enter a set of widths or dimensions in pixels separated by commas<br>
                 (e.g. <code>800,650x500,900</code></span>
             </div>
+            <details>
+                <summary>Advanced</summary>
+                <fieldset class="fieldset">
+                    <legend>Fill type</legend>
+                    {% assign fills = 'cover,contain,fit,inside,outside' | split: ',' %}
+                    {% for fill in fills %}
+                        <label for="fill-{{ fill }}" class="radio-label">
+                            <input type="radio" name="fill" id="fill-{{ fill }}" value="{{ fill }}">
+                            <span class="radio-text">{{ fill |  capitalize }}</span>
+                        </label>
+                    {% endfor %}
+                </fieldset>
+            </details>
         </details>
         <p><button class="submit">Convert &raquo;</button></p>
     </form>

@@ -36,3 +36,10 @@ colors.forEach(color => {
     checkbox.setAttribute('data-size', key);
   })
 });
+
+[...sizesSelected, ...resizesSelected].forEach(checkbox => {
+  checkbox.addEventListener('change', e => {
+    console.log('change')
+    settings.update(checkbox.getAttribute('data-size'), checkbox.value);
+  })
+})
