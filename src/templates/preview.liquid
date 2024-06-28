@@ -1,7 +1,11 @@
-<div class="preview">
-    <img src="systemfile://{{ options.info.filePath }}" class="preview-image" alt="">
-    <p>{{ options.info.info.format | replace: 'heif', 'avif' | upcase }}</p>
-    <p>{{ options.info.info.width }} x {{ options.info.info.height }}</p>
-    <p>{{ options.info.info.size | formatsize }}</p>
-    <a href="{{ options.filePath }}" class="preview-link" download aria-label="Download {{ options.info.path. }}"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-8 4v-5h2v3h12v-3h2v5z"/></svg></a>
-</div>
+{% if options.loading %}
+  <div class="preview" id="{{ options.id }}">
+    <p>Loading...</p>
+  </div>
+{% else %}
+  <img src="systemfile://{{ options.info.filePath }}" class="preview-image" alt="">
+  <p>{{ options.info.info.format | replace: 'heif', 'avif' | upcase }}</p>
+  <p>{{ options.info.info.width }} x {{ options.info.info.height }}</p>
+  <p>{{ options.info.info.size | formatsize }}</p>
+  <a href="{{ options.filePath }}" class="preview-link" download aria-label="Download {{ options.info.path. }}"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-8 4v-5h2v3h12v-3h2v5z"/></svg></a>
+{% endif %}

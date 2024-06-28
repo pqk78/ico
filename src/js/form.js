@@ -34,9 +34,15 @@ form && form.addEventListener('submit', async e => {
                 else {
                     options.resize = size.split('x').map(Number);
                 }
+                let id = `${image}${size}${format}`.replaceAll('.', '-').replaceAll('/', '-');
+                let loading = true;
+                liquid.render('preview', {loading, id}).then(html => {
+                  document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
+                })
                 ico.convert(image, options).then(info => {
-                    liquid.render('preview', {info}).then(html => {
-                        document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
+                    loading = false;
+                    liquid.render('preview', {loading, info}).then(html => {
+                        document.getElementById(id).innerHTML = html;
                     });
                 });
             });
