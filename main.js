@@ -63,7 +63,12 @@ const liquid = async (event, file, options = storage.getAll) => {
 }
 
 const updateSettings = (event, key, value) => {
-  storage.set(key, value);
+  if (value === 'delete') {
+    storage.unset(key);
+  }
+  else {
+    storage.set(key, value);
+  }
 }
 
 const createTempDir = () => {

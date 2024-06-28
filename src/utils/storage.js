@@ -23,7 +23,9 @@ class Storage {
     }
 
     unset(key) {
-        ldUnset(key);
+        console.log(key)
+        ldUnset(this.settings, key);
+        console.log(this.settings);
         this.#write();
     }
 
