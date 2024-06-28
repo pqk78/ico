@@ -52,7 +52,7 @@ const createWindow = () => {
   nativeTheme.themeSource = storage.get('settings.theme.mode.value');
 
   ipcMain.on('settings:restore-defaults', storage.restoreDefaults);
-  ipcMain.on('settings:update', storage.update);
+  ipcMain.on('settings:update', storage.set);
   ipcMain.on('settings:update-color-mode', updateColorMode);
 
   win.loadFile('./src/index.html');
