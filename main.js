@@ -12,12 +12,16 @@ const defaultSettings = require('./src/utils/settings.json');
 const Storage = require('./src/utils/storage');
 const storage = new Storage('settings', defaultSettings);
 
-const tmpDir = path.join((app || electron.remote.app).getPath('userData'), 'tmp');
+console.log(global)
+
+global.TMP_DIR = path.join((app || electron.remote.app).getPath('userData'), 'tmp');
+
+console.log(global)
 
 const createTempDir = () => {
-  fs.mkdir(tmpDir, { recursive: true }, err => {
+  fs.mkdir(global.TMP_DIR, { recursive: true }, err => {
     err && console.error('Problem creating temp dir', err);
-  })
+  });
 }
 
 const updateColorMode = (event, mode) => {
