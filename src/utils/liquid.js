@@ -1,6 +1,8 @@
 const { Liquid } = require('liquidjs');
-const Storage = require('./src/utils/storage');
+const path = require('node:path');
+const Storage = require('./storage');
 
+const defaultSettings = require('./settings.json');
 const storage = new Storage('settings', defaultSettings);
 
 const render = async (event, file, options = storage.getAll) => {
@@ -9,7 +11,8 @@ const render = async (event, file, options = storage.getAll) => {
       process.resourcesPath,
       path.join(process.cwd(), 'src/templates'),
     ],
-    extname: '.liquid'
+    extname: '.liquid',
+    jsTruthy: true,
   });
 
   engine.registerFilter('formatsize', (bytes) => {
