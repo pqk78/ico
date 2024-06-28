@@ -4,7 +4,7 @@ const scripts = document.querySelectorAll('script');
 document.addEventListener('DOMContentLoaded', e => {
     liquid_elements.forEach(el => {
         let file = el.getAttribute('data-file');
-        utils.liquid(file).then(html => {
+        liquid.render(file).then(html => {
             el.parentElement.innerHTML = html;
             scripts.forEach(script => {
                 if (!script.getAttribute('src') && script.getAttribute('data-src')) {
@@ -14,4 +14,3 @@ document.addEventListener('DOMContentLoaded', e => {
         });
     });
 })
-

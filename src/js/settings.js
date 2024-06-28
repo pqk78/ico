@@ -6,33 +6,33 @@ const resizes = document.querySelectorAll('input[name="resize"]');
 const resizesSelected = document.querySelectorAll('input[name="resize-selected"]');
 
 colors.forEach(color => {
-    color.addEventListener('change', e => {
-        let value;
-        colors.forEach(c => {
-            c.checked && (value = c.value);
-        });
-        utils.updateSettings('settings.theme.mode.value', value);
-        utils.updateColorMode(value);
-    })
+  color.addEventListener('change', e => {
+    let value;
+    colors.forEach(c => {
+      c.checked && (value = c.value);
+    });
+    settings.update('settings.theme.mode.value', value);
+    settings.updateColorMode(value);
+  })
 });
 
-[...sizes,...resizes].forEach(size => {
-    size.addEventListener('blur', e => {
-        let key = `settings.scale.${size.value.replaceAll(' ', '').replaceAll('px', '')}`;
-        let oldKey = size.getAttribute('data-size');
+[...sizes, ...resizes].forEach(size => {
+  size.addEventListener('blur', e => {
+    let key = `settings.scale.${size.value.replaceAll(' ', '').replaceAll('px', '')}`;
+    let oldKey = size.getAttribute('data-size');
 
-        if (key == oldKey) {
-            return;
-        }
+    if (key == oldKey) {
+      return;
+    }
 
-        // TO DO
-        // Exit if size already exists
+    // TO DO
+    // Exit if size already exists
 
-        let checkbox = document.getElementById(size.getAttribute('data-selected'));
-        utils.updateSettings(key, checkbox.value)
-        utils.updateSettings(oldKey, 'delete');
+    let checkbox = document.getElementById(size.getAttribute('data-selected'));
+    settings.update(key, checkbox.value)
+    settings.update(oldKey, 'delete');
 
-        size.setAttribute('data-size', key);
-        checkbox.setAttribute('data-size', key);
-    })
+    size.setAttribute('data-size', key);
+    checkbox.setAttribute('data-size', key);
+  })
 });

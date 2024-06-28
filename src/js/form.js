@@ -7,6 +7,10 @@ drag_area && drag_area.addEventListener('drop', e => {
     console.log(e);
 });
 
+file.addEventListener('change', e => {
+    console.log(file.files[0]?.path)
+})
+
 form && form.addEventListener('submit', async e => {
     e.preventDefault();
     let image = file.files[0]?.path;
@@ -30,10 +34,8 @@ form && form.addEventListener('submit', async e => {
                 else {
                     options.resize = size.split('x').map(Number);
                 }
-
-                utils.convert(image, options).then(info => {
-                    console.log(info)
-                    utils.liquid('preview', {info}).then(html => {
+                ico.convert(image, options).then(info => {
+                    liquid.render('preview', {info}).then(html => {
                         document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
                     });
                 });
