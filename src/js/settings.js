@@ -25,8 +25,14 @@ colors.forEach(color => {
             return;
         }
 
-        let value = document.getElementById(size.getAttribute('data-selected')).checked;
-        utils.updateSettings(key, value)
+        // TO DO
+        // Exit if size already exists
+
+        let checkbox = document.getElementById(size.getAttribute('data-selected'));
+        utils.updateSettings(key, checkbox.value)
         utils.updateSettings(oldKey, 'delete');
+
+        size.setAttribute('data-size', key);
+        checkbox.setAttribute('data-size', key);
     })
-})
+});
