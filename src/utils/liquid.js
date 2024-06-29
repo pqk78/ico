@@ -5,12 +5,13 @@ const Storage = require('./storage');
 const defaultSettings = require('./settings.json');
 const storage = new Storage('settings', defaultSettings);
 
-const render = async (event, file, options = storage.getAll) => {
+const render = async (file, options = storage.getAll()) => {
   const engine = new Liquid({
     root: [
       process.resourcesPath,
       path.join(process.cwd(), 'src/templates'),
     ],
+    cache: false,
     extname: '.liquid',
     jsTruthy: true,
   });

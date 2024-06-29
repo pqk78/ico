@@ -1,7 +1,7 @@
 const path = require('node:path');
 const sharp = require('sharp');
 
-const convert = async (event, image, options) => {
+const convert = async (image, options) => {
   let outmeta = {};
 
   let imagePath = outmeta.path = path.parse(image);

@@ -4,6 +4,7 @@ const sizes = document.querySelectorAll('input[name="size"]');
 const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
 const resizes = document.querySelectorAll('input[name="resize"]');
 const resizesSelected = document.querySelectorAll('input[name="resize-selected"]');
+const restore = document.getElementById('restore-defaults');
 
 colors.forEach(color => {
   color.addEventListener('change', e => {
@@ -29,8 +30,8 @@ colors.forEach(color => {
     // Exit if size already exists
 
     let checkbox = document.getElementById(size.getAttribute('data-selected'));
-    settings.update(key, checkbox.value)
-    settings.update(oldKey, 'delete');
+    settings.update(key, checkbox.checked)
+    settings.unset(oldKey);
 
     size.setAttribute('data-size', key);
     checkbox.setAttribute('data-size', key);
@@ -39,7 +40,14 @@ colors.forEach(color => {
 
 [...sizesSelected, ...resizesSelected].forEach(checkbox => {
   checkbox.addEventListener('change', e => {
-    console.log('change')
-    settings.update(checkbox.getAttribute('data-size'), checkbox.value);
+    settings.update(checkbox.getAttribute('data-size'), checkbox.checked);
   })
-})
+});
+
+restore.addEventListener('click', e => {
+  // TO DO add confirmation popup
+  settings.restoreDefaults();
+  settings.updateColorMode('dark'); // TO DO, get this from settings
+  form.reset();
+  window.location.reload();
+});

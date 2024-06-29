@@ -6,50 +6,55 @@ const ldGet = require('lodash/get');
 const ldUnset = require('lodash/unset');
 
 class Storage {
+  #path;
+  #defaults;
+  #settings;
+  
   constructor(name, defaults = {}) {
     const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-    this.path = path.join(userDataPath, `${name}.json`);
-    this.defaults = defaults;
-    this.settings = this.#read(this.path);
+    this.#path = path.join(userDataPath, `${name}.json`);
+    this.#defaults = defaults;
+    this.#settings = this.#read(this.#path);
   }
 
   get(key) {
-    return ldGet(this.settings, key);
+    return ldGet(this.#settings, key);
+  }
+
+  get getAll() {
+    return () => this.#read();
   }
 
   restoreDefaults() {
-    this.settings = this.defaults;
-    this.#read;
-    return this.settings;
+    this.#reset();
   }
 
   set(key, val) {
-    ldSet(this.settings, key, val);
+    ldSet(this.#settings, key, val);
     this.#write()
   }
 
   unset(key) {
-    console.log(key)
-    ldUnset(this.settings, key);
-    console.log(this.settings);
+    ldUnset(this.#settings, key);
     this.#write();
-  }
-
-  get getAll() {
-    return this.settings;
   }
 
   #read = () => {
     try {
-      return JSON.parse(fs.readFileSync(this.path));
+      return JSON.parse(fs.readFileSync(this.#path));
     } catch (err) {
-      return this.defaults;
+      return this.#defaults;
     }
+  }
+
+  #reset = () => {
+    this.#settings = JSON.parse(JSON.stringify(this.#defaults));
+    this.#write();
   }
 
   #write = () => {
     try {
-      fs.writeFileSync(this.path, JSON.stringify(this.settings));
+      fs.writeFileSync(this.#path, JSON.stringify(this.#settings));
     } catch (err) {
       console.error(err);
     }
