@@ -1,33 +1,152 @@
 .form {
-    .checkbox {
-        accent-color: var(--link-color);
+  h2 {
+    font-family: var(--font-stack-headline);
+    font-size: clamp(1.5rem, 4vw, 6rem);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .table {
+    border: 2px solid var(--table-border);
+    border-collapse: collapse;
+    margin: 3.75rem auto;
+
+    caption {
+      background-color: var(--table-caption-background);
+      background-image: var(--heading-gradient);
+      color: var(--table-caption-color);
+      font-size: 1.5rem;
+      font-weight: 650;
+      padding: .375rem 2rem;
     }
 
-    .checkbox-label {
-        display: block;
+    th[scope="col"] {
+      background-color: var(--body-color);
+      border: 1px solid var(--body-background);
+      color: var(--body-background);
+      font-size: 1.25rem;
+      font-weight: 575;
+      padding: .375rem 2rem;
     }
 
-    .submit {
-        background-color: var(--link-color);
-        border: unset;
-        color: var(--body-background);
-        cursor: pointer;
-        font-family: var(--font-stack-body);
-        font-size: 1.125rem;
-        padding: .625rem 2rem;
-        text-transform: uppercase;
+    th[scope="row"] {
+      border: 1px solid var(--body-color);
+      padding: .375rem 1rem;
+      font-size: 1.25rem;
+      font-weight: 575;
     }
+
+    td {
+      border: 1px solid var(--body-color);
+      padding: .25rem 1rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  .toggle {
+    appearance: none;
+    background-color: var(--link-color);
+    border: 2px solid var(--link-color);
+    border-radius: 1.25rem;
+    cursor: pointer;
+    display: block;
+    filter: grayscale(.8);
+    height: 2.5rem;
+    margin-inline: auto;
+    position: relative;
+    width: 3.75rem;
+    transition: all .2s ease;
+
+    &::before {
+      align-content: center;
+      background-color: var(--body-background);
+      clip-path: circle();
+      color: var(--body-color);
+      content: 'NO';
+      display: block;
+      font-size: .875rem;
+      height: calc(2.5rem - 4px);
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: calc(2.5rem - 4px);
+      text-align: center;
+      transition: all .2s ease;
+    }
+
+    &:checked {
+      filter: grayscale(0);
+
+      &::before {
+        content: 'YES';
+        left: 1.25rem;
+      }
+    }
+  }
+
+  .edit,
+  .delete {
+    background-color: transparent;
+    border: none;
+    color: var(--link-color);
+    cursor: pointer;
+    display: block;
+    font-size: 1.75rem;
+    margin-inline: auto;
+
+    svg {
+      display: block;
+    }
+  }
+
+
+
+  .form-item {
+    margin-block-end: 1rem;
+  }
+
+  .selected-label {
+    font-size: 1rem;
+  }
+
+  input[type="text"] {
+    background-color: ;
+  }
+
+  .checkbox {
+    accent-color: var(--link-color);
+  }
+
+  .checkbox-label {
+    display: block;
+  }
+
+  .radio {
+    accent-color: var(--link-color);
+  }
+
+  .submit {
+    background-color: var(--link-color);
+    border: unset;
+    color: var(--body-background);
+    cursor: pointer;
+    font-family: var(--font-stack-body);
+    font-size: 1.125rem;
+    padding: .625rem 2rem;
+    text-transform: uppercase;
+  }
 }
 
 .form-output {
-    .output {
-        display: flex;
-        flex-flow: wrap;
-        gap: 4rem;
-        padding: 4rem 0;
+  .output {
+    display: flex;
+    flex-flow: wrap;
+    gap: 4rem;
+    padding: 4rem 0;
 
-        p {
-            margin: 0;
-        }
+    p {
+      margin: 0;
     }
+  }
 }

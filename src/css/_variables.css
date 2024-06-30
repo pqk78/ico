@@ -12,12 +12,20 @@
     --heading-color: var(--thistle);
     --heading-gradient: linear-gradient(35deg, var(--thistle), var(--biscay-bay));
 
+    --table-border: var(--thistle);
+    --table-caption-background: var(--biscay-bay);
+    --table-caption-color: var(--snowman);
+
     @media (prefers-color-scheme: dark) {
         --body-background: var(--crow);
         --body-color: var(--snowman);
         --link-color: var(--vaporwave);
         --heading-color: var(--magenta);
         --heading-gradient: linear-gradient(35deg, var(--magenta), var(--vaporwave));
+
+        --table-border: var(--snowman);
+        --table-caption-background: var(--magenta);
+        --table-caption-color: var(--thistle);
     }
     
     --font-stack-body: quicksand, sans-serif;

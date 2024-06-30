@@ -62,7 +62,7 @@
                     {% assign fills = 'cover,contain,fit,inside,outside' | split: ',' %}
                     {% for fill in fills %}
                         <label for="fill-{{ fill }}" class="radio-label">
-                            <input type="radio" name="fill" id="fill-{{ fill }}" value="{{ fill }}">
+                            <input type="radio" class="radio" name="fill" id="fill-{{ fill }}" value="{{ fill }}">
                             <span class="radio-text">{{ fill |  capitalize }}</span>
                         </label>
                     {% endfor %}

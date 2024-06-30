@@ -5,7 +5,7 @@ const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
 const resizes = document.querySelectorAll('input[name="resize"]');
 const resizesSelected = document.querySelectorAll('input[name="resize-selected"]');
 const restore = document.getElementById('restore-defaults');
-const deleteButtons = document.querySelectorAll('.item-delete');
+const deleteButtons = document.querySelectorAll('.delete');
 
 colors.forEach(color => {
   color.addEventListener('change', e => {
@@ -48,7 +48,7 @@ colors.forEach(color => {
 deleteButtons.forEach(button => {
   button.addEventListener('click', e => {
     settings.unset(button.getAttribute('data-size'));
-    button.closest('.form-item').remove();
+    button.closest('tr').remove();
   })
 })
 
