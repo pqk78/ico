@@ -12,6 +12,18 @@ document.addEventListener('DOMContentLoaded', e => {
                     script.setAttribute('src', script.getAttribute('data-src'));
                 }
             });
+
+            document.querySelectorAll('.dialog-open').forEach(trigger => {
+              let dialog = document.getElementById(trigger.getAttribute('data-dialog'));
+              trigger.addEventListener('click', e => {
+                dialog.showModal();
+              });
+              dialog.querySelectorAll('.dialog-close').forEach(trigger => {
+                trigger.addEventListener('click', e => {
+                  dialog.close();
+                })
+              })
+            });
         });
     });
 })

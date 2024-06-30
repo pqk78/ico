@@ -33,3 +33,22 @@ h1,
 :where(a) {
     color: var(--link-color);
 }
+
+:where(dialog) {
+  background-color: var(--body-background);
+  color: var(--body-color);
+  &::backdrop {
+    background-color: var(--body-color);
+    opacity: .8;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .dialog-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+}
