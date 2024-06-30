@@ -15,24 +15,27 @@
       background-color: var(--table-caption-background);
       background-image: var(--heading-gradient);
       color: var(--table-caption-color);
-      font-size: 1.5rem;
+      font-size: 1.125rem;
       font-weight: 650;
       padding: .375rem 2rem;
+      text-transform: uppercase;
     }
 
     th[scope="col"] {
       background-color: var(--body-color);
       border: 1px solid var(--body-background);
       color: var(--body-background);
-      font-size: 1.25rem;
+      font-size: 1rem;
       font-weight: 575;
       padding: .375rem 2rem;
+      text-transform: uppercase;
     }
 
     th[scope="row"] {
       border: 1px solid var(--body-color);
       padding: .375rem 1rem;
-      font-size: 1.25rem;
+      font-size: 1rem;
+      font-variant: small-caps;
       font-weight: 575;
     }
 
@@ -52,21 +55,21 @@
     cursor: pointer;
     display: block;
     filter: grayscale(.8);
-    height: 2.5rem;
+    height: 1.625rem;
     margin-inline: auto;
     position: relative;
-    width: 3.75rem;
+    width: 3.5rem;
     transition: all .2s ease;
 
     &::before {
       align-content: center;
       background-color: var(--body-background);
-      clip-path: circle();
+      clip-path: ellipse(1.125rem .75rem);
       color: var(--body-color);
       content: 'NO';
       display: block;
-      font-size: .875rem;
-      height: calc(2.5rem - 4px);
+      font-size: .75rem;
+      height: calc(1.625rem - 4px);
       left: 0;
       position: absolute;
       top: 0;
@@ -80,7 +83,7 @@
 
       &::before {
         content: 'YES';
-        left: 1.25rem;
+        left: .875rem;
       }
     }
   }
