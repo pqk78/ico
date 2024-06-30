@@ -1,4 +1,4 @@
-<form class="form">
+<form class="form settings-form" id="settings-form">
   <h2 class="section-heading">Image Options</h2>
 
   <table class="table table-formats">
@@ -119,29 +119,14 @@
       {% endfor %}
     </tbody>
   </table>
-  
-  <fieldset>
-    <legend>Add new</legend>
-    <button class="add-size" id="add-size" type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
-        <path fill="currentColor"
-          d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48m96 224h-80v80h-32v-80h-80v-32h80v-80h32v80h80Z" />
-      </svg>
-      Add a new size
-    </button>
-    <dialog class="dialog" id="add-size-dialog">
-      <div class="dialog-inner">
-        <h2 class="dialog-title">Add a new default size</h2>
-        <fieldset>
-          <legend>Dimensions</legend>
-          <div class="form-item">
-            <label for="add-size-width">Width *</label>
-            <input type="text" id="add-size-width" name="add-size-width">
-          </div>
-        </fieldset>
-      </div>
-    </dialog>
-  </fieldset>
+
+  <button class="submit dialog-open" id="add-size--button" type="button" data-dialog="add-size--dialog" aria-haspopup="dialog">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
+      <path fill="currentColor"
+        d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48m96 224h-80v80h-32v-80h-80v-32h80v-80h32v80h80Z" />
+    </svg>
+    <span>Add a new size</span>
+  </button>
   <h2 class="section-heading">General Settings</h2>
   <fieldset>
     <legend>Color Mode</legend>
@@ -184,3 +169,45 @@
     </p>
   </fieldset>
 </form>
+
+<dialog class="dialog add-size" id="add-size--dialog">
+  <div class="dialog-inner">
+    <form class="form" id="add-size--form">
+      <h2>Add a custom size</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Size</th>
+            <th scope="col">Checked by default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input aria-label="New custoom size" type="text" id="add-size--size" name="add-size--size" data-selected="add-size--selected">
+            </td>
+            <td>
+              <input type="checkbox" class="toggle" id="add-size--selected"
+                name="add-size--selected" {{checked}} aria-label="Checked by default"
+                aria-describedby="size-{{ forloop.index }}" data-size="settings.resize.{{ size[0] }}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="dialog-buttons">
+        <button class="submit" id="add-size--submit" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48m96 224h-80v80h-32v-80h-80v-32h80v-80h32v80h80Z" />
+          </svg>
+          <span>Add</span>
+          </button>
+        <button class="submit dialog-close" id="add-size--cancel" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2m5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>
+          <span>Cancel</span>
+        </button>
+      </div>
+      <p id="add-size--feedback">&nbsp;</p>
+    </form>
+  </div>
+</dialog>

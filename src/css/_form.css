@@ -2,14 +2,13 @@
   h2 {
     font-family: var(--font-stack-headline);
     font-size: clamp(1.5rem, 4vw, 6rem);
-    text-align: center;
     text-transform: uppercase;
   }
 
   .table {
     border: 2px solid var(--table-border);
     border-collapse: collapse;
-    margin: 3.75rem auto;
+    margin-block: 3.75rem;
 
     caption {
       background-color: var(--table-caption-background);
@@ -130,12 +129,15 @@
   }
 
   .submit {
+    align-items: center;
     background-color: var(--link-color);
     border: unset;
     color: var(--body-background);
     cursor: pointer;
+    display: inline-flex;
     font-family: var(--font-stack-body);
     font-size: 1.125rem;
+    gap: .75rem;
     padding: .625rem 2rem;
     text-transform: uppercase;
   }

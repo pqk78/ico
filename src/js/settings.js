@@ -1,4 +1,6 @@
-const form = document.querySelector('.form');
+const form = document.getElementById('settings-form');
+const addSizeForm = document.getElementById('add-size--form');
+const addSizeSubmit = document.getElementById('add-size--submit');
 const colors = document.querySelectorAll('input[name="color-mode"]');
 const sizes = document.querySelectorAll('input[name="size"]');
 const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
@@ -52,10 +54,26 @@ deleteButtons.forEach(button => {
   })
 })
 
-restore.addEventListener('click', e => {
+restore && restore.addEventListener('click', e => {
   // TO DO add confirmation popup
   settings.restoreDefaults();
   settings.updateColorMode('dark'); // TO DO, get this from settings
   form.reset();
   window.location.reload();
+});
+
+addSizeSubmit && addSizeSubmit.addEventListener('click', e => {
+  // TO DO Validate input
+  const feedback = document.getElementById('add-size--feedback');
+  let size = document.getElementById('add-size--size').value.replaceAll('px', '');
+  let key = size.indexOf('x') == -1 ? `settings.scale.${size}` : `settings.resize.${size}`;
+  let val = document.getElementById('add-size--selected').checked;
+
+  feedback && (feedback.innerHTML = '&nbsp;');
+  try {
+    settings.update(key, val);
+    feedback && (feedback.textContent = 'New custom size added.');
+  } catch (err) {
+    feedback && (feedback.textContent = 'There was a problem adding the size');
+  }
 });
