@@ -3,49 +3,52 @@ const drag_area = document.getElementById('form__drag-area');
 const file = document.getElementById('file');
 
 drag_area && drag_area.addEventListener('drop', e => {
-    e.preventDefault();
-    console.log(e);
+  e.preventDefault();
+  console.log(e);
 });
 
 file.addEventListener('change', e => {
-    console.log(file.files[0]?.path)
+  console.log(file.files[0]?.path)
 })
 
 form && form.addEventListener('submit', async e => {
-    e.preventDefault();
-    let image = file.files[0]?.path;
-    if (image) {
-        let data = new FormData(form);
-        let formats = data.getAll('format');
-        let custom_sizes = data.get('custom_sizes').replaceAll(' ', '').replaceAll('px', '').split(',').filter(e => e);
-        let sizes = data.getAll('size');
-        sizes.push(...custom_sizes);
+  e.preventDefault();
+  let image = file.files[0]?.path;
+  if (image) {
+    let data = new FormData(form);
+    let formats = data.getAll('format');
+    let custom_sizes = data.get('custom_sizes').replaceAll(' ', '').replaceAll('px', '').split(',').filter(e => e);
+    let sizes = data.getAll('size');
+    let fit = data.get('fit');
+    let position = data.get('position');
+    let background = data.get('background');
+    sizes.push(...custom_sizes);
 
-        if (!formats?.length) {
-            formats = ['auto'];
-        }
-
-        formats.forEach(format => {
-            sizes.forEach(size => {
-                let options = { image, format };
-                if (size == 'auto') {
-                    options.resize = false;
-                }
-                else {
-                    options.resize = size.split('x').map(Number);
-                }
-                let id = `${image}${size}${format}`.replaceAll('.', '-').replaceAll('/', '-');
-                let loading = true;
-                liquid.render('preview', {loading, id}).then(html => {
-                  document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
-                })
-                ico.convert(image, options).then(info => {
-                    loading = false;
-                    liquid.render('preview', {loading, info}).then(html => {
-                        document.getElementById(id).innerHTML = html;
-                    });
-                });
-            });
-        });
+    if (!formats?.length) {
+      formats = ['auto'];
     }
+
+    formats.forEach(format => {
+      sizes.forEach(size => {
+        let options = { image, format, fit, position, background };
+        if (size == 'auto') {
+          options.resize = false;
+        }
+        else {
+          options.resize = size.split('x').map(Number);
+        }
+        let id = `${image}${size}${format}`.replaceAll('.', '-').replaceAll('/', '-');
+        let loading = true;
+        liquid.render('preview', { loading, id }).then(html => {
+          document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
+        })
+        ico.convert(image, options).then(info => {
+          loading = false;
+          liquid.render('preview', { loading, info }).then(html => {
+            document.getElementById(id).innerHTML = html;
+          });
+        });
+      });
+    });
+  }
 });

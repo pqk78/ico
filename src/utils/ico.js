@@ -12,8 +12,17 @@ const convert = async (image, options) => {
     let suffix = options.resize.length == 1 ? `.${options.resize[0]}w` : `.${options.resize.join('x')}`;
     let outFileName = outmeta.fileName = `${imagePath.name}${imagePath.ext}${suffix}${ext}`;
     let outFilePath = outmeta.filePath = path.join(global.TMP_DIR, outFileName);
+    let data = {
+      width: options.resize[0],
+      fit: options.fit,
+      position: options.position == 'entropy' ? sharp.strategy.entropy : options.position == 'attention' ? sharp.strategy.attention : options.position,
+      background: options.background
+    };
+    if (options.resize.length > 1) {
+      data.height = options.resize[1];
+    }
     outmeta.info = await sharp(image)
-      .resize(...options.resize)
+      .resize(data)
       .toFile(outFilePath);
   }
   else {
