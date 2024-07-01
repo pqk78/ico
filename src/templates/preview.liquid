@@ -1,4 +1,9 @@
-{% if options.loading %}
+{% if options.input %}
+  <div class="preview">
+    <p><img src="{{ options.path }}" class="preview-image" alt=""></p>
+    <p class="image-name">{{ options.name }}</p>
+  </div>  
+{% elsif options.loading %}
   <div class="preview" id="{{ options.id }}">
     <p>Loading...</p>
   </div>

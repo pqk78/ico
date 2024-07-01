@@ -1,20 +1,62 @@
 const form = document.querySelector('.form');
-const drag_area = document.getElementById('form__drag-area');
-const file = document.getElementById('file');
+const drag_area = document.getElementById('drag-area');
+const fileInput = document.getElementById('file');
+let imageList = [];
 
-drag_area && drag_area.addEventListener('drop', e => {
-  e.preventDefault();
-  console.log(e);
+const addFiles = files => {
+  let images = Array.from(files).filter(file => {
+    if (file.type.indexOf('image/') !== 0) {
+      return false;
+    }
+    let exists = false;
+    imageList.forEach(image => {
+      if (image.path == file.path) {
+        exists = true;
+      }
+    });
+    return !exists;
+  })
+  images.forEach(image => {
+    liquid.render('preview', { input: true, name: image.name, path: image.path }).then(html => {
+      document.querySelector('.form-input-preview').insertAdjacentHTML('beforeend', html)
+    })
+  })
+  imageList.push(...images);
+}
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+  drag_area.addEventListener(event, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  document.body.addEventListener(event, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  })
 });
 
-file.addEventListener('change', e => {
-  console.log(file.files[0]?.path)
+['dragenter', 'dragover'].forEach(event => {
+  drag_area.addEventListener(event, e => {
+    drag_area.classList.add('drag-active');
+  })
+});
+
+drag_area.addEventListener('dragleave', e => {
+  drag_area.classList.remove('drag-active');
+})
+
+drag_area.addEventListener('drop', e => {
+  drag_area.classList.remove('drag-active');
+  addFiles(e.dataTransfer.files);
+})
+
+fileInput.addEventListener('change', e => {
+  addFiles(fileInput.files);
 })
 
 form && form.addEventListener('submit', async e => {
   e.preventDefault();
-  let image = file.files[0]?.path;
-  if (image) {
+  imageList.forEach(image => {
     let data = new FormData(form);
     let formats = data.getAll('format');
     let custom_sizes = data.get('custom_sizes').replaceAll(' ', '').replaceAll('px', '').split(',').filter(e => e);
@@ -30,19 +72,19 @@ form && form.addEventListener('submit', async e => {
 
     formats.forEach(format => {
       sizes.forEach(size => {
-        let options = { image, format, fit, position, background };
+        let options = { image: image.path, format, fit, position, background };
         if (size == 'auto') {
           options.resize = false;
         }
         else {
           options.resize = size.split('x').map(Number);
         }
-        let id = `${image}${size}${format}`.replaceAll('.', '-').replaceAll('/', '-');
+        let id = `${image.path}${size}${format}`.replaceAll('.', '-').replaceAll('/', '-');
         let loading = true;
         liquid.render('preview', { loading, id }).then(html => {
           document.querySelector('.form-output .output').insertAdjacentHTML('beforeend', html)
         })
-        ico.convert(image, options).then(info => {
+        ico.convert(image.path, options).then(info => {
           loading = false;
           liquid.render('preview', { loading, info }).then(html => {
             document.getElementById(id).innerHTML = html;
@@ -50,5 +92,5 @@ form && form.addEventListener('submit', async e => {
         });
       });
     });
-  }
+  });
 });

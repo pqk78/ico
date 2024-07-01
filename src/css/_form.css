@@ -155,3 +155,21 @@
     }
   }
 }
+
+.drag-area {
+  &.drag-active {
+    outline: 3px dashed var(--link-color);
+    outline-offset: 3px;
+  }
+}
+
+.form-input-preview {
+  display: flex;
+    flex-flow: wrap;
+    gap: 2rem;
+    padding: 4rem 0;
+
+    p {
+      margin: 0;
+    }
+}

@@ -1,10 +1,11 @@
 <div class="form-container">
     <form class="form">
-        <div class="drag-area" id="drag-area" aria-hidden="true">
+        <div class="drag-area" id="drag-area">
             <span class="drag-area-label">Drag files here to upload or</span>
+            <p><label for="file" class="label">upload files manually:</label></p>
+            <input type="file" class="file-input visually-hidden" id="file" multiple accept="image/*">
         </div>
-        <p><label for="file" class="label">upload files manually:</label></p>
-        <p><input type="file" class="form_input--file" id="file"></p>
+        <div class="form-input-preview"></div>
         <details>
             <summary>Options</summary>
             <fieldset class="fieldset">
