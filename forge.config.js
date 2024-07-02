@@ -11,6 +11,7 @@ module.exports = {
       './src/templates/convert-form.liquid',
       './src/templates/help.liquid',
       './src/templates/index.liquid',
+      './src/templates/menu.liquid',
       './src/templates/preview.liquid',
       './src/templates/settings-form.liquid',
       './src/templates/settings.liquid',
