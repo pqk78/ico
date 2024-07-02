@@ -6,6 +6,7 @@
   flex-flow: column;
   gap: 1.25rem;
   height: 100%;
+  padding: 1.625rem 0;
 
   .label {
     display: none;

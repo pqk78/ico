@@ -9,6 +9,7 @@
   .main {
     flex: 0 1 100%;
     min-height: 100vh;
+    padding: 1.625rem;
     width: calc(100% - 6rem);
   }
 }
