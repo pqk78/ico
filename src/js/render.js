@@ -1,29 +1,50 @@
-const liquid_elements = document.querySelectorAll('liquid');
-const scripts = document.querySelectorAll('script');
 
-document.addEventListener('DOMContentLoaded', e => {
-    liquid_elements.forEach(async el => {
-        let file = el.getAttribute('data-file');
-        let options = await settings.getAll();
-        liquid.render(file, options).then(html => {
-            el.parentElement.innerHTML = html;
-            scripts.forEach(script => {
-                if (!script.getAttribute('src') && script.getAttribute('data-src')) {
-                    script.setAttribute('src', script.getAttribute('data-src'));
-                }
-            });
+const render = async (el, options) => {
+  let html = await liquid.render(el.getAttribute('data-file'), options);
+  el.parentElement.innerHTML = html;
+}
 
-            document.querySelectorAll('.dialog-open').forEach(trigger => {
-              let dialog = document.getElementById(trigger.getAttribute('data-dialog'));
-              trigger.addEventListener('click', e => {
-                dialog.showModal();
-              });
-              dialog.querySelectorAll('.dialog-close').forEach(trigger => {
-                trigger.addEventListener('click', e => {
-                  dialog.close();
-                })
-              })
-            });
-        });
+document.addEventListener('DOMContentLoaded', async e => {
+  let calls = [];
+  let options = await settings.getAll();
+  let page = new URL(window.location.href);
+  console.log(page)
+  options.page = {
+    pathname: page.pathname
+  };
+
+  document.querySelectorAll('liquid').forEach(el => {
+    calls.push(render(el, options));
+  });
+
+  await Promise.all(calls);
+
+  document.querySelectorAll('script').forEach(script => {
+    if (!script.getAttribute('src') && script.getAttribute('data-src')) {
+      script.setAttribute('src', script.getAttribute('data-src'));
+    }
+  });
+
+  document.querySelectorAll('.dialog-open').forEach(trigger => {
+    let dialog = document.getElementById(trigger.getAttribute('data-dialog'));
+    trigger.addEventListener('click', e => {
+      dialog.showModal();
     });
+    dialog.querySelectorAll('.dialog-close').forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        dialog.close();
+      })
+    })
+  });
+
+  const expand = document.querySelector('.util-menu .expand');
+  expand && expand.addEventListener('click', e => {
+    let menu = expand.closest('.util-menu');
+    if (menu.classList.contains('expanded')) {
+      menu.classList.remove('expanded');
+    }
+    else {
+      menu.classList.add('expanded');
+    }
+  });
 })
