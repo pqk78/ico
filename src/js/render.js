@@ -1,4 +1,3 @@
-
 const render = async (el, options) => {
   let html = await liquid.render(el.getAttribute('data-file'), options);
   el.parentElement.innerHTML = html;
@@ -8,10 +7,10 @@ document.addEventListener('DOMContentLoaded', async e => {
   let calls = [];
   let options = await settings.getAll();
   let page = new URL(window.location.href);
-  console.log(page)
   options.page = {
     pathname: page.pathname
   };
+  options.menuopen = localStorage.getItem('menuopen') == 'true' ? 'expanded' : '';
 
   document.querySelectorAll('liquid').forEach(el => {
     calls.push(render(el, options));
@@ -42,9 +41,11 @@ document.addEventListener('DOMContentLoaded', async e => {
     let menu = expand.closest('.util-menu');
     if (menu.classList.contains('expanded')) {
       menu.classList.remove('expanded');
+      localStorage.setItem('menuopen', false);
     }
     else {
       menu.classList.add('expanded');
+      localStorage.setItem('menuopen', true);
     }
   });
 })
