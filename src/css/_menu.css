@@ -1,0 +1,52 @@
+.util-menu {
+  align-items: flex-end;
+  background-image: var(--menu-gradient);
+  border-right: 1px solid var(--menu-border-color);
+  display: flex;
+  flex-flow: column;
+  gap: 1.25rem;
+  height: 100%;
+
+  .label {
+    display: none;
+  }
+
+  button {
+    background-color: #0000;
+    border: unset;
+    color: var(--biscay-bay);
+    display: flex;
+    font-size: 3.25rem;
+    padding: 0 .625rem;
+  }
+
+  a {
+    align-items: center;
+    display: flex;
+    font-size: 3.25rem;
+    padding: 0 calc(.625rem + 4px) 0 .625rem;
+    text-decoration: none;
+
+    &[aria-current] {
+      border-right: 4px solid var(--menu-border-color);
+      padding: 0 .625rem;
+    }
+  }
+
+  svg {
+    display: block;
+  }
+
+  &.expanded {
+    .expand {
+      transform: rotateY(180deg);
+    }
+    .label {
+      display: inline-block;
+      font-size: 1.25rem;
+      font-weight: 550;
+      margin-inline: .75rem;
+      text-transform: uppercase;
+    }
+  }
+}

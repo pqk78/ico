@@ -1,0 +1,14 @@
+.body {
+  display: flex;
+
+  .side {
+    flex: 1 0 0;
+    width: fit-content;
+  }
+
+  .main {
+    flex: 0 1 100%;
+    min-height: 100vh;
+    width: calc(100% - 6rem);
+  }
+}

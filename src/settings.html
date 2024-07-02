@@ -9,13 +9,18 @@
 		<script src="./js/render.js" type="module"></script>
 		<script data-src="./js/settings.js"></script>
 	</head>
-	<body>
-		<div class="container">
-			<h1 class="page-title">Settings</h1>
-			<p><a href="./index.html">Back</a></p>
-			<div class="page-body">
-				<liquid data-file="settings-form"></liquid>
-			</div>
-		</div>
+	<body class="body">
+    <div class="side">
+      <liquid data-file="menu"></liquid>
+    </div>
+    <div class="main">
+      <div class="container">
+        <h1 class="page-title">Settings</h1>
+        <p><a href="./index.html">Back</a></p>
+        <div class="page-body">
+          <liquid data-file="settings-form"></liquid>
+        </div>
+      </div>
+    </div>
 	</body>
 </html>

@@ -5,13 +5,17 @@
     --snowman: #fefafc;
     --thistle: #32062a;
     --vaporwave: #2fe1f9;
+
+    --light-gray: #cad8d2;
+    --light-gray-50: #cad8d280;
     
     --body-background: var(--snowman);
     --body-color: var(--crow);
     --link-color: var(--biscay-bay);
     --heading-color: var(--thistle);
     --heading-gradient: linear-gradient(35deg, var(--thistle), var(--biscay-bay));
-
+    --menu-gradient: linear-gradient(to right, #067a8920, #067a8910, #067a8920);
+    --menu-border-color: var(--biscay-bay);
     --table-border: var(--thistle);
     --table-caption-background: var(--biscay-bay);
     --table-caption-color: var(--snowman);
