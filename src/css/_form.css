@@ -161,6 +161,11 @@
     outline: 3px dashed var(--link-color);
     outline-offset: 3px;
   }
+
+  .upload-label {
+    cursor: pointer;
+    font-weight: 550;
+  }
 }
 
 .form-input-preview {
