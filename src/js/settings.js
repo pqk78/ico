@@ -1,6 +1,7 @@
 const form = document.getElementById('settings-form');
 const addSizeForm = document.getElementById('add-size--form');
 const addSizeSubmit = document.getElementById('add-size--submit');
+const formats = document.querySelectorAll('input[name="format-selected"]');
 const colors = document.querySelectorAll('input[name="color-mode"]');
 const sizes = document.querySelectorAll('input[name="size"]');
 const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
@@ -9,15 +10,10 @@ const resizesSelected = document.querySelectorAll('input[name="resize-selected"]
 const restore = document.getElementById('restore-defaults');
 const deleteButtons = document.querySelectorAll('.delete');
 
-colors.forEach(color => {
-  color.addEventListener('change', e => {
-    let value;
-    colors.forEach(c => {
-      c.checked && (value = c.value);
-    });
-    settings.update('settings.theme.mode.value', value);
-    settings.updateColorMode(value);
-  })
+formats.forEach(format => {
+  format.addEventListener('change', e => {
+    settings.update(format.getAttribute('data-format'), format.checked);
+  });
 });
 
 [...sizes, ...resizes].forEach(size => {
@@ -52,7 +48,18 @@ deleteButtons.forEach(button => {
     settings.unset(button.getAttribute('data-size'));
     button.closest('tr').remove();
   })
-})
+});
+
+colors.forEach(color => {
+  color.addEventListener('change', e => {
+    let value;
+    colors.forEach(c => {
+      c.checked && (value = c.value);
+    });
+    settings.update('settings.theme.mode.value', value);
+    settings.updateColorMode(value);
+  })
+});
 
 restore && restore.addEventListener('click', e => {
   // TO DO add confirmation popup
