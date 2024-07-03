@@ -7,7 +7,7 @@
   gap: 1.25rem;
   height: max(100%, 100vh);
   padding: 1.625rem 0;
-  width: 5rem;
+  width: 3rem;
 
   .label {
     display: none;
@@ -18,20 +18,20 @@
     border: unset;
     color: var(--biscay-bay);
     display: flex;
-    font-size: 3.25rem;
-    padding: 0 .625rem;
+    font-size: 2.25rem;
+    padding: 0 calc(.125rem + 3px) 0 .125rem;
   }
 
   a {
     align-items: center;
     display: flex;
-    font-size: 3.25rem;
-    padding: 0 calc(.625rem + 4px) 0 .625rem;
+    font-size: 2.25rem;
+    padding: 0 calc(.125rem + 3px) 0 .125rem;
     text-decoration: none;
 
     &[aria-current] {
-      border-right: 4px solid var(--menu-border-color);
-      padding: 0 .625rem;
+      border-right: 3px solid var(--menu-border-color);
+      padding: 0 .125rem;
     }
   }
 
@@ -40,13 +40,15 @@
   }
 
   &.expanded {
-    width: 12rem;
+    width: 10.75rem;
     .expand {
-      transform: rotateY(180deg);
+      svg {
+        transform: rotateY(180deg);
+      }
     }
     .label {
       display: inline-block;
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 550;
       margin-inline: .75rem;
       text-transform: uppercase;
