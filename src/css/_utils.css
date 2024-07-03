@@ -1,0 +1,18 @@
+.loading {
+  opacity: 0;
+  animation: fade backwards .1s;
+}
+
+.loaded {
+  opacity: 1;
+  animation: fade forwards .1s;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

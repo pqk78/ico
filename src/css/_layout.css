@@ -2,7 +2,7 @@
   display: flex;
 
   .side {
-    flex: 1 0 0;
+    flex: 0 0 0;
     width: fit-content;
   }
 

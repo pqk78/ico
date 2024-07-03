@@ -5,8 +5,9 @@
   display: flex;
   flex-flow: column;
   gap: 1.25rem;
-  height: 100%;
+  height: max(100%, 100vh);
   padding: 1.625rem 0;
+  width: 5rem;
 
   .label {
     display: none;
@@ -39,6 +40,7 @@
   }
 
   &.expanded {
+    width: 12rem;
     .expand {
       transform: rotateY(180deg);
     }

@@ -24,33 +24,36 @@ const addFiles = files => {
   imageList.push(...images);
 }
 
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
-  drag_area.addEventListener(event, e => {
-    e.preventDefault();
-    e.stopPropagation();
+if (drag_area) {
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+    drag_area.addEventListener(event, e => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.body.addEventListener(event, e => {
+      e.preventDefault();
+      e.stopPropagation();
+    })
   });
-  document.body.addEventListener(event, e => {
-    e.preventDefault();
-    e.stopPropagation();
+  
+  ['dragenter', 'dragover'].forEach(event => {
+    drag_area.addEventListener(event, e => {
+      drag_area.classList.add('drag-active');
+    })
+  });
+  
+  drag_area.addEventListener('dragleave', e => {
+    drag_area.classList.remove('drag-active');
   })
-});
-
-['dragenter', 'dragover'].forEach(event => {
-  drag_area.addEventListener(event, e => {
-    drag_area.classList.add('drag-active');
+  
+  drag_area.addEventListener('drop', e => {
+    drag_area.classList.remove('drag-active');
+    addFiles(e.dataTransfer.files);
   })
-});
+}
 
-drag_area.addEventListener('dragleave', e => {
-  drag_area.classList.remove('drag-active');
-})
 
-drag_area.addEventListener('drop', e => {
-  drag_area.classList.remove('drag-active');
-  addFiles(e.dataTransfer.files);
-})
-
-fileInput.addEventListener('change', e => {
+fileInput && fileInput.addEventListener('change', e => {
   addFiles(fileInput.files);
 })
 
