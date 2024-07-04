@@ -11,12 +11,15 @@
     
     --body-background: var(--snowman);
     --body-color: var(--crow);
+    --code-bakground: var(--shadow-color);
     --link-color: var(--biscay-bay);
     --heading-color: var(--thistle);
     --heading-gradient: linear-gradient(in srgb 35deg, var(--thistle), var(--biscay-bay));
+    --input-focus: var(--vaporwave);
     --menu-gradient: linear-gradient(in srgb to right, #067a8920, #067a8910, #067a8920);
     --menu-border-color: var(--biscay-bay);
-    --shadow: 0 0 .75rem .5rem #32062a15;
+    --shadow: 0 0 .75rem .5rem var(--shadow-color);
+    --shadow-color: #32062a15;
     --table-border: var(--thistle);
     --table-caption-background: var(--biscay-bay);
     --table-caption-color: var(--snowman);
@@ -24,11 +27,13 @@
     @media (prefers-color-scheme: dark) {
         --body-background: var(--crow);
         --body-color: var(--snowman);
+        --code-background: #fefafc40;
         --link-color: var(--vaporwave);
         --heading-color: var(--magenta);
         --heading-gradient: linear-gradient(in srgb 35deg, var(--magenta), var(--vaporwave));
+        --input-focus: var(--magenta);
         --menu-gradient: linear-gradient(in srgb to right, #cad8d215, #cad8d208, #cad8d218), linear-gradient(in srgb to bottom, #cad8d200, #cad8d205);
-        --shadow: 0 0 .75rem .5rem #fefafc25;
+        --shadow-color: #fefafc25;
 
         --table-border: var(--snowman);
         --table-caption-background: var(--magenta);

@@ -128,8 +128,8 @@
     <span>Add a new size</span>
   </button>
   <h2 class="section-heading">General Settings</h2>
-  <fieldset>
-    <legend>Color Mode</legend>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Color Mode</legend>
     {% for option in options.settings.theme.mode.options %}
     {% if option[0] == options.settings.theme.mode.value %}
     {% assign checked = 'checked' %}
@@ -138,15 +138,15 @@
     {% endif %}
     <div class="form-item">
       <label for="color-mode-{{ option[0] }}" class="radio-label">
-        <input type="radio" class="radio" name="color-mode" value="{{ option[0] }}" id="color-mode-{{ option[0] }}" {{
+        <input type="radio" class="visually-hidden" name="color-mode" value="{{ option[0] }}" id="color-mode-{{ option[0] }}" {{
           checked }}>
         {{ option[1] }}
       </label>
     </div>
     {% endfor %}
   </fieldset>
-  <fieldset>
-    <legend>When to delete temporary files</legend>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">When to delete temporary files</legend>
     {% for option in options.settings.temp_files.schedule.options %}
     {% if option[0] == options.settings.temp_files.schedule.value %}
     {% assign checked = 'checked' %}
@@ -155,15 +155,15 @@
     {% endif %}
     <div class="form-item">
       <label for="temp-files-{{ option[0] }}" class="radio-label">
-        <input type="radio" class="radio" name="temp-files" value="{{ option[0] }}" id="temp-files-{{ option[0] }}" {{
+        <input type="radio" class="visually-hidden" name="temp-files" value="{{ option[0] }}" id="temp-files-{{ option[0] }}" {{
           checked }}>
         {{ option[1] }}
       </label>
     </div>
     {% endfor %}
   </fieldset>
-  <fieldset>
-    <legend>Restore Defaults</legend>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Restore Defaults</legend>
     <p>
       <button class="submit" type="button" id="restore-defaults">Restore Default Settings</button>
     </p>

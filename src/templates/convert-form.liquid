@@ -1,138 +1,163 @@
 <div class="form-container convert">
-    <form class="form convert">
-        <div class="drag-area" id="drag-area">
-            <p><span class="drag-area-label">Drag files here or</span> <label for="file" class="label upload-label">upload manually</label></p>
-            <input type="file" class="file-input visually-hidden" id="file" multiple accept="image/*">
-        </div>
-        <div class="form-input-preview">
-          <p>Images to process</p>
-        </div>
-        <div class="form-controls">
-          <details>
-            <summary>Options</summary>
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Formats</legend>
-                {% for format in settings.formats %}
-                    {% if format[1] %}
-                        {% assign checked = 'checked' %}
-                    {% else %}
-                        {% assign checked = '' %}
-                    {% endif %}
-                    <label for="formats--{{ format[0] }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="format" id="formats--{{ format[0] }}" value="{{ format[0] }}" {{ checked }}>
-                        <span class="checkbox-text">{{ format[0] |  replace: 'jpg', 'jpeg' | upcase }}</span>
-                    </label>
-                {% endfor %}
-            </fieldset>
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Scale</legend>
-                {% for size in settings.scale %}
-                    {% if size[1] %}
-                        {% assign checked = 'checked' %}
-                    {% else %}
-                        {% assign checked = '' %}                        
-                    {% endif %}
-                    <label for="scale--{{ size[0] }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}" {{ checked }}>
-                        <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[0] == "auto" %}px{% endunless %}</span>
-                    </label>
-                {% endfor %}
-            </fieldset>
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Resize</legend>
-                {% for size in settings.resize %}
-                    {% if size[1] %}
-                        {% assign checked = 'checked' %}
-                    {% else %}
-                        {% assign checked = '' %}                        
-                    {% endif %}
-                    <label for="scale--{{ size[0] }}" class="checkbox-label">
-                        <input class="checkbox" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}" {{ checked }}>
-                        <span class="checkbox-text">{{ size[0]}}</span>
-                    </label>
-                {% endfor %}
-            </fieldset>
-            <div class="input-container">
-                <label for="custom-sizes" class="input-label">Custom Sizes</label><br>
-                <input type="text" class="input" id="custom-sizes" name="custom_sizes" aria-describedby="custom-sizes--help">
-                <span class="input-help" id="custom-sizes--help">Enter a set of widths or dimensions in pixels separated by commas<br>
-                (e.g. <code>800,650x500,900</code></span>
-            </div>
-            <details>
-                <summary>Advanced</summary>
-                <fieldset class="fieldset">
-                    <legend>Fit type</legend>
-                    {% assign fits = 'cover,contain,fill,inside,outside' | split: ',' %}
-                    {% for fit in fits %}
-                      {% if fit == 'cover' %}
-                        {% assign checked = 'checked' %}
-                        {% else %}
-                        {% assign checked = '' %}
-                      {% endif %}
-                      <label for="fit-{{ fit }}" class="radio-label">
-                          <input type="radio" class="radio" name="fit" id="fit-{{ fit }}" value="{{ fit }}" {{ checked }}>
-                          <span class="radio-text">{{ fit |  capitalize }}</span>
-                      </label>
-                    {% endfor %}
-                </fieldset>
-                <fieldset>
-                  <legend>Position</legend>
-                  {% assign positions = 'left top,top,right top,left,center,right,left bottom,bottom,right bottom' |  split: ',' %}
-                  {% capture position_svg -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m5 0a1 1 0 0 1 .117 1.993L14.99 5a1 1 0 0 1-.117-1.993zm5 0a1 1 0 0 1 .117 1.993L19.99 5a1 1 0 0 1-.117-1.993zm0 5a1 1 0 0 1 .117 1.993L19.99 10a1 1 0 0 1-.117-1.993zm0 6a1 1 0 0 1 .117 1.993L19.99 16a1 1 0 0 1-.117-1.993zM4 14a1 1 0 0 1 .117 1.993L3.99 16a1 1 0 0 1-.117-1.993zm16 5a1 1 0 0 1 .117 1.993L19.99 21a1 1 0 0 1-.117-1.993zm-5 0a1 1 0 0 1 .117 1.993L14.99 21a1 1 0 0 1-.117-1.993zm-6 0a1 1 0 0 1 .117 1.993L8.99 21a1 1 0 0 1-.117-1.993zm-5 0a1 1 0 0 1 .117 1.993L3.99 21a1 1 0 0 1-.117-1.993z"/></svg>,
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3.005H5a2 2 0 0 0-2 2v5a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-5a2 2 0 0 0-2-2M4 13.995a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L3 14.995a1 1 0 0 1 1-1m0 5a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L3 19.995a1 1 0 0 1 1-1m5 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L8 19.995a1 1 0 0 1 1-1m6 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L14 19.995a1 1 0 0 1 1-1m5 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L19 19.995a1 1 0 0 1 1-1m0-5a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L19 14.995a1 1 0 0 1 1-1"/></svg>,
-                  {%- endcapture %}
-                  {% assign position_svg_array = position_svg |  split: ',' %}
-                  {% capture top %}{% endcapture %}
-                  {% capture top_right %}{% endcapture %}
-                  {% capture left %}{% endcapture %}
-                  {% capture center %}{% endcapture %}
-                  {% capture right %}{% endcapture %}
-                  {% capture bottom_left %}{% endcapture %}
-                  {% capture bottom %}{% endcapture %}
-                  {% capture bottom_right %}{% endcapture %}
-                  
-                  <ul class="position-list">
-                    {% for position in positions %}
-                      {% assign slug = position |  replace: ' ', '-' %}
-                      {% if position == 'center' %}
-                        {% assign checked = 'checked' %}
-                        {% else %}
-                        {% assign checked = '' %}
-                      {% endif %}
-                      <li class="position {{ slug }}">
-                        <label for="position-{{ slug }}">
-                          <input type="radio" class="radio position-radio {{ slug }}" id="position-{{ slug }}" name="position" value="{{ position }}" {{ checked }}>
-                          {{ position }}
-                        </label>
-                      </li>
-                    {% endfor %}
-                    <li role="separator"></li>
-                    <li class="position">
-                      <label for="position-entropy">
-                        <input type="radio" class="radio" id="position-entropy" name="position" value="entropy">
-                        Entropy
-                      </label>
-                    </li>
-                    <li class="position">
-                      <label for="position-attention">
-                        <input type="radio" class="radio" id="position-attention" name="position" value="attention">
-                        Attention
-                      </label>
-                    </li>
-                  </ul>
-                </fieldset>
-                <fieldset>
-                  <legend>Background Color</legend>
-                  <input type="color" class="color" name="background">
-                </fieldset>
-            </details>
-        </details>
-        <p><button class="submit">Convert &raquo;</button></p>
-        </div>
-    </form>
-    <div class="form-output">
-      <p>Processed images</p>
-      <div class="output"></div>
+  <form class="form convert">
+    <div class="drag-area" id="drag-area">
+      <p><span class="drag-area-label">Drag files here or</span> <label for="file" class="label upload-label">upload
+          manually</label></p>
+      <input type="file" class="file-input visually-hidden" id="file" multiple accept="image/*">
     </div>
+    <div class="form-input-preview">
+      <p>Images to process</p>
+    </div>
+    <div class="form-controls">
+      <details>
+        <summary>Options</summary>
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Formats</legend>
+          {% for format in settings.formats %}
+          {% if format[1] %}
+          {% assign checked = 'checked' %}
+          {% else %}
+          {% assign checked = '' %}
+          {% endif %}
+          <label for="formats--{{ format[0] }}" class="checkbox-label">
+            <input class="visually-hidden" type="checkbox" name="format" id="formats--{{ format[0] }}"
+              value="{{ format[0] }}" {{ checked }}>
+            <span class="checkbox-text">{{ format[0] | replace: 'jpg', 'jpeg' | upcase }}</span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Scale</legend>
+          {% for size in settings.scale %}
+          {% if size[1] %}
+          {% assign checked = 'checked' %}
+          {% else %}
+          {% assign checked = '' %}
+          {% endif %}
+          <label for="scale--{{ size[0] }}" class="checkbox-label">
+            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}"
+              {{ checked }}>
+            <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[0] == "auto"
+              %}px{% endunless %}</span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Resize</legend>
+          {% for size in settings.resize %}
+          {% if size[1] %}
+          {% assign checked = 'checked' %}
+          {% else %}
+          {% assign checked = '' %}
+          {% endif %}
+          <label for="scale--{{ size[0] }}" class="checkbox-label">
+            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}"
+              {{ checked }}>
+            <span class="checkbox-text">{{ size[0]}}</span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Custom Sizes</legend>
+          <input type="text" class="text-input" id="custom-sizes" name="custom_sizes"
+            aria-describedby="custom-sizes--help" aria-label="Custom size input">
+          <span class="input-help" id="custom-sizes--help">Enter a set of widths or dimensions in pixels separated by
+            commas<br>
+            (e.g. <code>800,650x500,900</code>)</span>
+        </fieldset>
+        <details>
+          <summary>Advanced</summary>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Fit type</legend>
+            {% assign fits = 'cover,contain,fill,inside,outside' | split: ',' %}
+            {% for fit in fits %}
+            {% if fit == 'cover' %}
+            {% assign checked = 'checked' %}
+            {% else %}
+            {% assign checked = '' %}
+            {% endif %}
+            <label for="fit-{{ fit }}" class="radio-label">
+              <input type="radio" class="visually-hidden" name="fit" id="fit-{{ fit }}" value="{{ fit }}" {{ checked }}>
+              <span class="radio-text">{{ fit | capitalize }}</span>
+            </label>
+            {% endfor %}
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Position</legend>
+            <span class="input-help">Select focal point by position or by strategy</span>
+            {% assign positions = 'left top,top,right top,left,center,right,left bottom,bottom,right bottom' | split:
+            ',' %}
+            {% capture position_svg -%}
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M10 3H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m5 0a1 1 0 0 1 .117 1.993L14.99 5a1 1 0 0 1-.117-1.993zm5 0a1 1 0 0 1 .117 1.993L19.99 5a1 1 0 0 1-.117-1.993zm0 5a1 1 0 0 1 .117 1.993L19.99 10a1 1 0 0 1-.117-1.993zm0 6a1 1 0 0 1 .117 1.993L19.99 16a1 1 0 0 1-.117-1.993zM4 14a1 1 0 0 1 .117 1.993L3.99 16a1 1 0 0 1-.117-1.993zm16 5a1 1 0 0 1 .117 1.993L19.99 21a1 1 0 0 1-.117-1.993zm-5 0a1 1 0 0 1 .117 1.993L14.99 21a1 1 0 0 1-.117-1.993zm-6 0a1 1 0 0 1 .117 1.993L8.99 21a1 1 0 0 1-.117-1.993zm-5 0a1 1 0 0 1 .117 1.993L3.99 21a1 1 0 0 1-.117-1.993z" />
+            </svg>,
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M19 3.005H5a2 2 0 0 0-2 2v5a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-5a2 2 0 0 0-2-2M4 13.995a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L3 14.995a1 1 0 0 1 1-1m0 5a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L3 19.995a1 1 0 0 1 1-1m5 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L8 19.995a1 1 0 0 1 1-1m6 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L14 19.995a1 1 0 0 1 1-1m5 0a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L19 19.995a1 1 0 0 1 1-1m0-5a1 1 0 0 1 .993.883l.007.127a1 1 0 0 1-1.993.117L19 14.995a1 1 0 0 1 1-1" />
+            </svg>,
+            {%- endcapture %}
+            {% assign position_svg_array = position_svg | split: ',' %}
+            {% capture top %}{% endcapture %}
+            {% capture top_right %}{% endcapture %}
+            {% capture left %}{% endcapture %}
+            {% capture center %}{% endcapture %}
+            {% capture right %}{% endcapture %}
+            {% capture bottom_left %}{% endcapture %}
+            {% capture bottom %}{% endcapture %}
+            {% capture bottom_right %}{% endcapture %}
+
+            <ul class="position-list">
+              <li class="positions">
+                <span class="label">By position</span>
+                <ul>
+                  {% for position in positions %}
+                  {% assign slug = position | replace: ' ', '-' %}
+                  {% if position == 'center' %}
+                  {% assign checked = 'checked' %}
+                  {% else %}
+                  {% assign checked = '' %}
+                  {% endif %}
+                  <li class="position {{ slug }}">
+                    <label class="radio-label" for="position-{{ slug }}">
+                      <input type="radio" class="visually-hidden" id="position-{{ slug }}"
+                        name="position" value="{{ position }}" {{ checked }}>
+                      {{ position }}
+                    </label>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="strategies">
+                <span class="label">By strategy</span>
+                <ul>
+                  <li>
+                    <label class="radio-label" for="position-attention">
+                      <input type="radio" class="visually-hidden" id="position-attention" name="position" value="attention">
+                      Attention
+                    </label>
+                  </li>
+                  <li>
+                    <label class="radio-label" for="position-entropy">
+                      <input type="radio" class="visually-hidden" id="position-entropy" name="position" value="entropy">
+                      Entropy
+                    </label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Background Color</legend>
+            <input type="color" class="color" name="background">
+          </fieldset>
+        </details>
+      </details>
+      <p><button class="submit">Convert &raquo;</button></p>
+    </div>
+  </form>
+  <div class="form-output">
+    <p>Processed images</p>
+    <div class="output"></div>
+  </div>
 </div>

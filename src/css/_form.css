@@ -71,12 +71,23 @@
       box-shadow: var(--shadow);
       padding: 1.625rem;
     }
-
-    
   }
+
   h2 {
     font-family: var(--font-stack-headline);
     font-size: clamp(1.5rem, 4vw, 6rem);
+    text-transform: uppercase;
+  }
+
+  .fieldset {
+    margin: 1.25rem 0;
+    border-radius: 0.375rem;
+    padding: 1em;
+  }
+
+  .fieldset-legend {
+    font-size: 1rem;
+    padding-inline: .75rem;
     text-transform: uppercase;
   }
 
@@ -187,34 +198,110 @@
     font-size: 1rem;
   }
 
-  input[type="text"] {
-    background-color: ;
-  }
-
-  .checkbox {
-    accent-color: var(--link-color);
-  }
-
-  .checkbox-label {
-    display: block;
-  }
-
+  .checkbox,
   .radio {
     accent-color: var(--link-color);
+  }
+
+  .checkbox-label,
+  .radio-label {
+    background-color: var(--body-background);
+    border: 1px solid var(--body-color);
+    border-radius: .375rem;
+    display: inline-block;
+    font-weight: 425;
+    margin-inline-end: .75rem;
+    margin-block-end: .75rem;
+    padding: .25rem 1rem;
+
+    &:has(:checked) {
+      background-color: var(--link-color);
+      border-color: var(--link-color);
+      color: var(--body-background);
+      font-weight: 475;
+    }
+  }
+
+  .text-input {
+    background-color: transparent;
+    background-image: linear-gradient(in srgb 35deg, var(--shadow-color), transparent, var(--shadow-color));
+    border: 1px solid var(--body-color);
+    font-size: 1rem;
+    margin-block-end: .625rem;
+    padding: .25rem .75rem;
+    width: min(100%, 20rem);
+
+    &:focus-visible {
+      background-color: var(--shadow-color);
+    }
+  }
+
+  .input-help {
+    display: block;
+    font-size: 1rem;
   }
 
   .submit {
     align-items: center;
     background-color: var(--link-color);
     border: unset;
+    border-radius: .25rem;
     color: var(--body-background);
     cursor: pointer;
     display: inline-flex;
     font-family: var(--font-stack-body);
-    font-size: 1.125rem;
+    font-size: 1rem;
+    font-weight: 525;
     gap: .75rem;
     padding: .625rem 2rem;
     text-transform: uppercase;
+  }
+
+  .position-list {
+    margin-block-start: 1.25rem;
+    padding: 0;
+
+    ::marker {
+      font-size: 0;
+    }
+
+    .label {
+      font-size: 1rem;
+      font-weight: 525;
+      text-transform: uppercase;
+    }
+
+    .positions {
+      ul {
+        background-color: var(--table-border);
+        border: 1px solid var(--table-border);
+        display: grid;
+        gap: 1px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-block: .75rem;
+        padding: 0;
+        text-align: center;
+
+        .radio-label {
+          align-content: center;
+          border: unset;
+          border-radius: unset;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    .strategies {
+      ul {
+        margin-block: .75rem;
+        padding: 0;
+
+        .radio-label {
+          border-radius: unset;
+        }
+      }
+    }
   }
 }
 
