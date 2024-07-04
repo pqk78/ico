@@ -3,7 +3,7 @@ import renderliquid from './renderliquid.js';
 export default function menu() {
   const menu = document.querySelector('.util-menu');
   const expand = menu && menu.querySelector('.expand');
-  const menulinks = menu && menu.querySelectorAll('a');
+  const menuItems = menu && menu.querySelectorAll('.menu-item');
 
   expand && expand.addEventListener('click', e => {
     let menu = expand.closest('.util-menu');
@@ -17,16 +17,16 @@ export default function menu() {
     }
   });
 
-  menulinks && menulinks.forEach(link => {
-    link.addEventListener('click', async e => {
+  menuItems && menuItems.forEach(item => {
+    item.addEventListener('click', async e => {
       e.preventDefault();
-      if (link.hasAttribute('aria-current')) {
+      if (item.getAttribute('aria-selected') === 'true') {
         return;
       }
       let options = await storage.getAll();
-      renderliquid(link.getAttribute('data-file'), options, document.getElementById('main-container'));
-      menu.querySelector('[aria-current]').removeAttribute('aria-current');
-      link.setAttribute('aria-current', 'page');
+      renderliquid(item.getAttribute('data-file'), options, document.getElementById('main-container'));
+      menu.querySelector('[aria-selected="true"]').setAttribute('aria-selected', 'false');
+      item.setAttribute('aria-selected', 'true');
     });
   });
 }

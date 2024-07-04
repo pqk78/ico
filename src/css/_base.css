@@ -20,7 +20,7 @@ h1,
     background-image: var(--heading-gradient);
     color: transparent;
     font-family: var(--font-stack-headline);
-    font-size: clamp(1.625rem, 4.5vw, 6.75rem);
+    font-size: 1.75rem;
     text-transform: uppercase;
     width: fit-content;
 }

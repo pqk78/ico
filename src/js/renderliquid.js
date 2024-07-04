@@ -1,5 +1,3 @@
-import * as callbacks from './common.js';
-
 export default async function renderliquid(file, options, target) {
   try {
     let html = await liquid.render(file, options);
@@ -7,7 +5,8 @@ export default async function renderliquid(file, options, target) {
       target.innerHTML = html;
       target.classList.remove('loading');
       target.classList.add('loaded');
-      callbacks[file] && callbacks[file]();
+      window.global.callbacks[file] && window.global.callbacks[file]();
+      window.global.callbacks.common();
     }
     if (target.classList.contains('loading')) {
       load(file);

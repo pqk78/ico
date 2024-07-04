@@ -1,16 +1,30 @@
-import index from './index.js';
-import menu from './menu.js';
-import settings from './settings.js';
-
-const common = () => {
+export default function common() {
   const scripts = document.querySelectorAll('script');
-  const dialogClose = document.querySelectorAll('.dialog-dlose');
+  const dialogClose = document.querySelectorAll('.dialog-close');
   const dialogOpen = document.querySelectorAll('.dialog-open');
-  const close = (e, dialog) => {
-    dialog.close();
+  const tabContent = document.querySelectorAll('.tabs');
+  const close = e => {
+    e.currentTarget.dialog.close();
   }
-  const open = (e, dialog) => {
-    dialog.showModal();
+  const open = e => {
+    e.currentTarget.dialog.showModal();
+  }
+  const tabsUpdate = e => {
+    let tab = e.currentTarget;
+    console.log(tab)
+    let content = tab.closest('.tabs');
+    if (tab.getAttribute('aria-selected') === 'true') {
+      return;
+    }
+    let panel = document.getElementById(tab.getAttribute('aria-controls'));
+    console.log(panel)
+    let currentTab = content.querySelector('.tab[aria-selected="true"]');
+    let currentPanel = document.getElementById(currentTab.getAttribute('aria-controls'));
+
+    currentTab.setAttribute('aria-selected', 'false');
+    currentPanel.classList.remove('current');
+    tab.setAttribute('aria-selected', 'true');
+    panel.classList.add('current');
   }
 
   scripts.forEach(script => {
@@ -20,14 +34,19 @@ const common = () => {
   });
 
   dialogOpen.forEach(trigger => {
-    let dialog = document.getElementById(trigger.getAttribute('data-dialog'));
-    trigger.addEventListener('click', open, dialog);
+    trigger.dialog = document.getElementById(trigger.getAttribute('data-dialog'));
+    trigger.addEventListener('click', open);
   });
 
   dialogClose.forEach(trigger => {
-    let dialog = trigger.closest('dialog');
-    trigger.addEventListener('click', close, dialog)
+    trigger.dialog = trigger.closest('dialog');
+    trigger.addEventListener('click', close)
+  })
+
+  tabContent.forEach(content => {
+    let tabs = content.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', tabsUpdate);
+    })
   })
 }
-
-export { index, common, menu, settings }
