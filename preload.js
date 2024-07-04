@@ -8,10 +8,10 @@ contextBridge.exposeInMainWorld('liquid', {
   render: (file, options) => ipcRenderer.invoke('liquid:render', file, options),
 })
 
-contextBridge.exposeInMainWorld('settings', {
-  getAll: () => ipcRenderer.invoke('settings:get-all'),
-  restoreDefaults: () => ipcRenderer.send('settings:restore-defaults'),
-  unset: (key) => ipcRenderer.send('settings:unset', key),
-  update: (key, value) => ipcRenderer.send('settings:update', key, value),
-  updateColorMode: mode => ipcRenderer.send('settings:update-color-mode', mode),
+contextBridge.exposeInMainWorld('storage', {
+  getAll: () => ipcRenderer.invoke('storage:get-all'),
+  restoreDefaults: () => ipcRenderer.send('storage:restore-defaults'),
+  unset: (key) => ipcRenderer.send('storage:unset', key),
+  update: (key, value) => ipcRenderer.send('storage:update', key, value),
+  updateColorMode: mode => ipcRenderer.send('storage:update-color-mode', mode),
 });

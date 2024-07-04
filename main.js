@@ -51,10 +51,10 @@ const createWindow = () => {
 
   nativeTheme.themeSource = storage.get('settings.theme.mode.value');
 
-  ipcMain.on('settings:restore-defaults', (event) => { storage.restoreDefaults() });
-  ipcMain.on('settings:unset', (event, key) => { storage.unset(key) });
-  ipcMain.on('settings:update', (event, key, value) => { storage.set(key, value) });
-  ipcMain.on('settings:update-color-mode', updateColorMode);
+  ipcMain.on('storage:restore-defaults', (event) => { storage.restoreDefaults() });
+  ipcMain.on('storage:unset', (event, key) => { storage.unset(key) });
+  ipcMain.on('storage:update', (event, key, value) => { storage.set(key, value) });
+  ipcMain.on('storage:update-color-mode', updateColorMode);
 
   win.loadFile('./src/index.html');
 }
@@ -62,7 +62,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   ipcMain.handle('ico:convert', (event, image, options) => ico.convert(image, options));
   ipcMain.handle('liquid:render', (event, file, options) => liquid.render(file, options));
-  ipcMain.handle('settings:get-all', () => storage.getAll() );
+  ipcMain.handle('storage:get-all', () => storage.getAll() );
   protocol.handle(systemfileProtocol, request => {
     const filePath = request.url.slice('systemfile://'.length)
     return net.fetch(`file://${filePath}`);
