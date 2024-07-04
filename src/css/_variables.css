@@ -16,6 +16,7 @@
     --heading-gradient: linear-gradient(in srgb 35deg, var(--thistle), var(--biscay-bay));
     --menu-gradient: linear-gradient(in srgb to right, #067a8920, #067a8910, #067a8920);
     --menu-border-color: var(--biscay-bay);
+    --shadow: 0 0 .75rem .5rem #32062a15;
     --table-border: var(--thistle);
     --table-caption-background: var(--biscay-bay);
     --table-caption-color: var(--snowman);
@@ -27,6 +28,7 @@
         --heading-color: var(--magenta);
         --heading-gradient: linear-gradient(in srgb 35deg, var(--magenta), var(--vaporwave));
         --menu-gradient: linear-gradient(in srgb to right, #cad8d215, #cad8d208, #cad8d218), linear-gradient(in srgb to bottom, #cad8d200, #cad8d205);
+        --shadow: 0 0 .75rem .5rem #fefafc25;
 
         --table-border: var(--snowman);
         --table-caption-background: var(--magenta);

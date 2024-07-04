@@ -1,4 +1,66 @@
+.form-container {
+  &.convert {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 5fr 2fr;
+  }
+}
+
 .form {
+  &.convert {
+    display: grid;
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 3;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+
+    .drag-area {
+      border-radius: .625rem;
+      box-shadow: var(--shadow);
+      grid-column: 1 / span 2;
+      grid-row: 1;
+      outline: 1px solid var(--table-border);
+      outline-offset: -1px;
+      padding: 1.75rem 2rem;
+      text-align: center;
+      &.drag-active {
+        outline: 4px dashed var(--link-color);
+        outline-offset: -2px;
+      }
+    
+      .upload-label {
+        cursor: pointer;
+        font-weight: 725;
+        transition: color .2s ease;
+    
+        &:hover {
+          color: var(--link-color);
+        }
+      }
+    }
+
+    .form-input-preview {
+      border: 1px solid var(--table-border);
+      border-radius: .625rem;
+      box-shadow: var(--shadow);
+      grid-column: 2;
+      grid-row: 2 / span 2;
+      padding: 1.625rem;
+  
+      p {
+        margin: 0 0 1em;
+      }
+    }
+
+    .form-controls {
+      border: 1px solid var(--table-border);
+      border-radius: .625rem;
+      box-shadow: var(--shadow);
+      padding: 1.625rem;
+    }
+
+    
+  }
   h2 {
     font-family: var(--font-stack-headline);
     font-size: clamp(1.5rem, 4vw, 6rem);
@@ -144,6 +206,17 @@
 }
 
 .form-output {
+  border: 1px solid var(--table-border);
+  border-radius: .625rem;
+  box-shadow: var(--shadow);
+  grid-column: 1;
+  grid-row: 3;
+  padding: 1.625rem;
+
+  p {
+    margin: 0 0 1em;
+  }
+
   .output {
     display: flex;
     flex-flow: wrap;
@@ -156,25 +229,5 @@
   }
 }
 
-.drag-area {
-  &.drag-active {
-    outline: 3px dashed var(--link-color);
-    outline-offset: 3px;
-  }
 
-  .upload-label {
-    cursor: pointer;
-    font-weight: 550;
-  }
-}
 
-.form-input-preview {
-  display: flex;
-    flex-flow: wrap;
-    gap: 2rem;
-    padding: 4rem 0;
-
-    p {
-      margin: 0;
-    }
-}

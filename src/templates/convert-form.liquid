@@ -1,11 +1,14 @@
-<div class="form-container">
-    <form class="form">
+<div class="form-container convert">
+    <form class="form convert">
         <div class="drag-area" id="drag-area">
             <p><span class="drag-area-label">Drag files here or</span> <label for="file" class="label upload-label">upload manually</label></p>
             <input type="file" class="file-input visually-hidden" id="file" multiple accept="image/*">
         </div>
-        <div class="form-input-preview"></div>
-        <details>
+        <div class="form-input-preview">
+          <p>Images to process</p>
+        </div>
+        <div class="form-controls">
+          <details>
             <summary>Options</summary>
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Formats</legend>
@@ -126,9 +129,10 @@
             </details>
         </details>
         <p><button class="submit">Convert &raquo;</button></p>
+        </div>
     </form>
     <div class="form-output">
-        <div class="input"></div>
-        <div class="output"></div>
+      <p>Processed images</p>
+      <div class="output"></div>
     </div>
 </div>
