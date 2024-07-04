@@ -35,9 +35,10 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 const createWindow = () => {
+  let defaultBounds = storage.get('settings.window');
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: defaultBounds.width,
+    height: defaultBounds.height,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -55,6 +56,12 @@ const createWindow = () => {
   ipcMain.on('storage:unset', (event, key) => { storage.unset(key) });
   ipcMain.on('storage:update', (event, key, value) => { storage.set(key, value) });
   ipcMain.on('storage:update-color-mode', updateColorMode);
+
+  win.on('resized', () => {
+    let bounds = win.getBounds();
+    storage.set('settings.window.width', bounds.width);
+    storage.set('settings.window.height', bounds.height);
+  })
 
   win.loadFile('./src/index.html');
 }

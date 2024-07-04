@@ -1,45 +1,49 @@
 {
-    "settings": {
-        "formats": {
-            "avif": true,
-            "jpg": true,
-            "png": false,
-            "webp": false
-        },
-        "scale": {
-            "480": false,
-            "720": false,
-            "1080": false,
-            "1920": false,
-            "auto": true
-        },
-        "resize": {
-            "400x300": false,
-            "600x600": false,
-            "720x480": false,
-            "1200x800": false,
-            "1920x1080": false
-        },
-        "temp_files": {
-            "schedule": {
-                "value": "onclose",
-                "options": {
-                    "onclose": "Each time I close the window",
-                    "10": "After 10 days",
-                    "30": "After 30 days",
-                    "manual": "Do not delete. I will delete them manually."
-                }
-            }
-        },
-        "theme": {
-            "mode": {
-                "value": "dark",
-                "options": {
-                    "light": "Light Mode",
-                    "dark": "Dark Mode",
-                    "system": "Use system settings"
-                }
-            }
+  "settings": {
+    "formats": {
+      "avif": true,
+      "jpg": true,
+      "png": false,
+      "webp": false
+    },
+    "scale": {
+      "480": false,
+      "720": false,
+      "1080": false,
+      "1920": false,
+      "auto": true
+    },
+    "resize": {
+      "400x300": false,
+      "600x600": false,
+      "720x480": false,
+      "1200x800": false,
+      "1920x1080": false
+    },
+    "temp_files": {
+      "schedule": {
+        "value": "onclose",
+        "options": {
+          "onclose": "Each time I close the window",
+          "10": "After 10 days",
+          "30": "After 30 days",
+          "manual": "Do not delete. I will delete them manually."
         }
+      }
+    },
+    "theme": {
+      "mode": {
+        "value": "dark",
+        "options": {
+          "light": "Light Mode",
+          "dark": "Dark Mode",
+          "system": "Use system settings"
+        }
+      }
+    },
+    "window": {
+      "height": 600,
+      "width": 800
     }
+  }
 }
