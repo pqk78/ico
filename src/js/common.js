@@ -11,13 +11,11 @@ export default function common() {
   }
   const tabsUpdate = e => {
     let tab = e.currentTarget;
-    console.log(tab)
     let content = tab.closest('.tabs');
     if (tab.getAttribute('aria-selected') === 'true') {
       return;
     }
     let panel = document.getElementById(tab.getAttribute('aria-controls'));
-    console.log(panel)
     let currentTab = content.querySelector('.tab[aria-selected="true"]');
     let currentPanel = document.getElementById(currentTab.getAttribute('aria-controls'));
 
