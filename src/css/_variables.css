@@ -13,8 +13,8 @@
     --body-color: var(--crow);
     --link-color: var(--biscay-bay);
     --heading-color: var(--thistle);
-    --heading-gradient: linear-gradient(35deg, var(--thistle), var(--biscay-bay));
-    --menu-gradient: linear-gradient(to right, #067a8920, #067a8910, #067a8920);
+    --heading-gradient: linear-gradient(in srgb 35deg, var(--thistle), var(--biscay-bay));
+    --menu-gradient: linear-gradient(in srgb to right, #067a8920, #067a8910, #067a8920);
     --menu-border-color: var(--biscay-bay);
     --table-border: var(--thistle);
     --table-caption-background: var(--biscay-bay);
@@ -25,7 +25,8 @@
         --body-color: var(--snowman);
         --link-color: var(--vaporwave);
         --heading-color: var(--magenta);
-        --heading-gradient: linear-gradient(35deg, var(--magenta), var(--vaporwave));
+        --heading-gradient: linear-gradient(in srgb 35deg, var(--magenta), var(--vaporwave));
+        --menu-gradient: linear-gradient(in srgb to right, #cad8d215, #cad8d208, #cad8d218), linear-gradient(in srgb to bottom, #cad8d200, #cad8d205);
 
         --table-border: var(--snowman);
         --table-caption-background: var(--magenta);

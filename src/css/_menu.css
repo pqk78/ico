@@ -5,8 +5,10 @@
   display: flex;
   flex-flow: column;
   gap: 1.25rem;
-  height: max(100%, 100vh);
+  height: max(100vh, 16rem);
   padding: 1.625rem 0;
+  position: sticky;
+  top: min(0px, calc(100vh - 16rem));
   width: 3rem;
 
   .label {
@@ -16,7 +18,7 @@
   button {
     background-color: #0000;
     border: unset;
-    color: var(--biscay-bay);
+    color: var(--link-color);
     display: flex;
     font-size: 2.25rem;
     padding: 0 calc(.125rem + 3px) 0 .125rem;
@@ -30,7 +32,7 @@
     text-decoration: none;
 
     &[aria-current] {
-      border-right: 3px solid var(--menu-border-color);
+      border-right: 3px solid var(--link-color);
       padding: 0 .125rem;
     }
   }
