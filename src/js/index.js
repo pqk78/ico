@@ -19,7 +19,15 @@ export default function index() {
     })
     images.forEach(image => {
       liquid.render('preview', { input: true, name: image.name, path: image.path }).then(html => {
-        document.querySelector('.form-input-preview').insertAdjacentHTML('beforeend', html)
+        let template = document.createElement('template');
+        template.innerHTML = html;
+        let preview = template.content.children[0];
+        preview.querySelector('.delete').addEventListener('click', e => {
+          imageList = imageList.filter(item => item.path != image.path);
+          preview.remove();
+        });
+        document.querySelector('.form-input-preview').appendChild(preview);
+
       })
     })
     imageList.push(...images);

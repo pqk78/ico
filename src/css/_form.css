@@ -50,6 +50,19 @@
       p {
         margin: 0 0 1em;
       }
+
+      .preview {
+        margin: 0 0 .875rem;
+      }
+
+      .image-name {
+        display: block;
+        margin: 1em 0;
+      }
+
+      .edit {
+        font-size: 1em;
+      }
     }
 
     .form-controls {
