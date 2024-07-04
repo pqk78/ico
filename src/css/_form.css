@@ -87,6 +87,7 @@
 
   .fieldset-legend {
     font-size: 1rem;
+    font-weight: 525;
     padding-inline: .75rem;
     text-transform: uppercase;
   }
@@ -267,7 +268,7 @@
 
     .label {
       font-size: 1rem;
-      font-weight: 525;
+      font-weight: 425;
       text-transform: uppercase;
     }
 

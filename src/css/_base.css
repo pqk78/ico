@@ -67,3 +67,8 @@ h1,
     justify-content: center;
   }
 }
+
+:where(summary) {
+  font-weight: 525;
+  text-transform: uppercase;
+}
