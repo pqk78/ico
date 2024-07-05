@@ -1,4 +1,5 @@
-const { Liquid } = require('liquidjs');
+const { Liquid, tagToken, remainTokens } = require('liquidjs');
+const md = require('markdown-it');
 const path = require('node:path');
 const Storage = require('./storage');
 
@@ -26,6 +27,30 @@ const render = async (file, options = storage.getAll()) => {
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
   });
+
+  engine.registerTag('markdown', {
+    parse(tagToken, remainTokens) {
+      this.tpls = [];
+      let closed = false;
+      while(remainTokens.length) {
+        let token = remainTokens.shift();
+        if (token.name === 'endmarkdown') {
+          closed = true;
+          break;
+        }
+        let tpl = this.liquid.parser.parseToken(token, remainTokens);
+        this.tpls.push(tpl);
+      }
+      if (!closed) throw new Error(`tag ${tagToken.getText()} not closed`);
+    },
+    * render(context, emitter) {
+      let out = [];
+      this.tpls.forEach(tpl => {
+        emitter.write(md().render(tpl.str));
+      })
+    }
+  })
+  
 
   return await engine.renderFile(file, { options, base_path: process.cwd() });
 }

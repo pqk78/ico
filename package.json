@@ -34,6 +34,7 @@
     "electron-squirrel-startup": "^1.0.1",
     "liquidjs": "^10.14.0",
     "lodash": "^4.17.21",
+    "markdown-it": "^14.1.0",
     "node-addon-api": "^8.0.0",
     "node-gyp": "^10.1.0",
     "path": "^0.12.7",
