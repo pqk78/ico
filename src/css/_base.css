@@ -21,6 +21,7 @@ h1,
     color: transparent;
     font-family: var(--font-stack-headline);
     font-size: 1.75rem;
+    margin: 0 0 1rem;
     text-transform: uppercase;
     width: fit-content;
 }
