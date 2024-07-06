@@ -1,3 +1,4 @@
+import renderliquid from './renderliquid.js';
 export default function settings() {
   const form = document.getElementById('settings-form');
   const addSizeForm = document.getElementById('add-size--form');
@@ -8,6 +9,8 @@ export default function settings() {
   const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
   const resizes = document.querySelectorAll('input[name="resize"]');
   const resizesSelected = document.querySelectorAll('input[name="resize-selected"]');
+  const fits = document.querySelectorAll('input[name="fit"]');
+  const positions = document.querySelectorAll('input[name="position"]');
   const restore = document.getElementById('restore-defaults');
   const deleteButtons = document.querySelectorAll('.delete');
 
@@ -53,12 +56,23 @@ export default function settings() {
 
   colors.forEach(color => {
     color.addEventListener('change', e => {
-      let value;
-      colors.forEach(c => {
-        c.checked && (value = c.value);
-      });
-      storage.update('settings.theme.mode.value', value);
-      storage.updateColorMode(value);
+      let formData = new FormData(form);      
+      storage.update('settings.theme.mode.value', formData.get('color-mode'));
+      storage.updateColorMode(formData.get('color-mode'));
+    })
+  });
+
+  fits.forEach(fit => {
+    fit.addEventListener('change', e => {
+      let formData = new FormData(form);      
+      storage.update('settings.fit.value', formData.get('fit'));
+    })
+  })
+
+  positions.forEach(position => {
+    position.addEventListener('change', e => {
+      let formData = new FormData(form);    
+      storage.update('settings.position.value', formData.get('position'));
     })
   });
 
@@ -67,7 +81,7 @@ export default function settings() {
     storage.restoreDefaults();
     storage.updateColorMode('dark'); // TO DO, get this from settings
     form.reset();
-    window.location.reload();
+    // window.location.reload();
   });
 
   addSizeSubmit && addSizeSubmit.addEventListener('click', e => {
@@ -79,7 +93,7 @@ export default function settings() {
 
     feedback && (feedback.innerHTML = '&nbsp;');
     try {
-      settings.update(key, val);
+      storage.update(key, val);
       feedback && (feedback.textContent = 'New custom size added.');
     } catch (err) {
       feedback && (feedback.textContent = 'There was a problem adding the size');

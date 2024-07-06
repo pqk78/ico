@@ -71,9 +71,8 @@
           <summary>Advanced</summary>
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Fit type</legend>
-            {% assign fits = 'cover,contain,fill,inside,outside' | split: ',' %}
-            {% for fit in fits %}
-            {% if fit == 'cover' %}
+            {% for fit in settings.fit.options %}
+            {% if fit == settings.fit.value %}
             {% assign checked = 'checked' %}
             {% else %}
             {% assign checked = '' %}
@@ -87,12 +86,11 @@
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Position</legend>
             <span class="input-help">Select focal point by position or by strategy</span>
-            {% assign positions = 'left top,top,right top,left,center,right,left bottom,bottom,right bottom' | split: ',' %}
             <ul class="position-list">
               <li class="positions">
                 <span class="label">By position</span>
                 <ul>
-                  {% for position in positions %}
+                  {% for position in settings.position.options.positions %}
                   {% assign slug = position | replace: ' ', '-' %}
                   {% if position == 'center' %}
                   {% assign checked = 'checked' %}
@@ -112,18 +110,19 @@
               <li class="strategies">
                 <span class="label">By strategy</span>
                 <ul>
-                  <li>
-                    <label class="radio-label" for="position-attention">
-                      <input type="radio" class="visually-hidden" id="position-attention" name="position" value="attention">
-                      Attention
-                    </label>
-                  </li>
-                  <li>
-                    <label class="radio-label" for="position-entropy">
-                      <input type="radio" class="visually-hidden" id="position-entropy" name="position" value="entropy">
-                      Entropy
-                    </label>
-                  </li>
+                  {% for strategy in settings.position.options.strategies %}
+                    {% if strategy == settings.position.value %}
+                      {% assign checked = 'checked' %}
+                      {% else %}
+                      {% assign checked = '' %}
+                    {% endif %}
+                    <li>
+                      <label class="radio-label" for="position-{{ strategy }}">
+                        <input type="radio" class="visually-hidden" id="position-{{ strategy }}" name="position" value="{{ strategy }}" {{ checked }}>
+                        {{ strategy |  capitalize }}
+                      </label>
+                    </li>
+                  {% endfor %}
                 </ul>
               </li>
             </ul>
