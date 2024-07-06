@@ -10,7 +10,7 @@ const buildTemplate = (app, win) => [
         {
           label: 'Settings',
           click: () => {
-            win.loadFile('./src/settings.html')
+            win.webContents.send('ico:nav', 'settings')
           },
         },
         { type: 'separator' },
@@ -48,7 +48,7 @@ const buildTemplate = (app, win) => [
       {
         label: 'ICO Help',
         click: () => {
-          win.loadFile('./src/help.html')
+          win.webContents.send('ico:nav', 'help')
         },
       }
     ]

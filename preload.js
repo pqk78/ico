@@ -2,6 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('ico', {
   convert: (image, options) => ipcRenderer.invoke('ico:convert', image, options),
+  onNavChange: (callback) => ipcRenderer.on('ico:nav', (e, file) => callback(file)),
 });
 
 contextBridge.exposeInMainWorld('liquid', {
