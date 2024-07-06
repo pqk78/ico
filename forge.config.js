@@ -8,6 +8,7 @@ module.exports = {
     icon: './src/images/logo-dark',
     
     extraResource: [
+      './src/templates/files.liquid',
       './src/templates/help.liquid',
       './src/templates/index.liquid',
       './src/templates/menu.liquid',

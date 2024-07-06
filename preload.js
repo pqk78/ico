@@ -2,6 +2,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('ico', {
   convert: (image, options) => ipcRenderer.invoke('ico:convert', image, options),
+  deleteFile: (file) => ipcRenderer.send('ico:delete-file', file),
+  getFiles: () => ipcRenderer.invoke('ico:get-all'),
   onNavChange: (callback) => ipcRenderer.on('ico:nav', (e, file) => callback(file)),
 });
 

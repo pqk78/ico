@@ -52,7 +52,8 @@ const createWindow = () => {
 
   nativeTheme.themeSource = storage.get('settings.theme.mode.value');
 
-  ipcMain.on('storage:restore-defaults', (event) => { storage.restoreDefaults() });
+  ipcMain.on('ico:delete-file', (event, file) => { ico.deleteFile(file) });
+  ipcMain.on('storage:restore-defaults', event => { storage.restoreDefaults() });
   ipcMain.on('storage:unset', (event, key) => { storage.unset(key) });
   ipcMain.on('storage:update', (event, key, value) => { storage.set(key, value) });
   ipcMain.on('storage:update-color-mode', updateColorMode);
@@ -68,6 +69,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   ipcMain.handle('ico:convert', (event, image, options) => ico.convert(image, options));
+  ipcMain.handle('ico:get-all', event => ico.getAll());
   ipcMain.handle('liquid:render', (event, file, options) => liquid.render(file, options));
   ipcMain.handle('storage:get-all', () => storage.getAll() );
   protocol.handle(systemfileProtocol, request => {

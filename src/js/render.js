@@ -1,11 +1,12 @@
 import renderliquid from "./renderliquid.js";
 import common from './common.js';
+import files from './files.js';
 import index from './index.js';
 import menu from './menu.js';
 import settings from './settings.js';
 
 window.global = {
-  callbacks: { common, index, menu, settings }
+  callbacks: { common, files, index, menu, settings }
 }
 
 document.addEventListener('DOMContentLoaded', async e => {

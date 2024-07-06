@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const path = require('node:path');
 const sharp = require('sharp');
 
@@ -34,4 +35,21 @@ const convert = async (image, options) => {
   return outmeta;
 }
 
-module.exports = { convert }
+const deleteFile = async (file) => {
+  try {
+    let filePath = path.join(global.TMP_DIR, file);
+    fs.rmSync(filePath);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+const getAll = () => {
+  let files = fs.readdirSync(global.TMP_DIR);
+  return {
+    path: global.TMP_DIR,
+    files: files.map(file => path.parse(file)),
+  };
+}
+
+module.exports = { convert, deleteFile, getAll };

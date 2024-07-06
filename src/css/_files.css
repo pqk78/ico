@@ -1,0 +1,40 @@
+.file-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.25rem;
+
+  .file {
+    border: 2px solid var(--table-border);
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .file-name {
+    display: block;
+    margin-block-end: .75rem;
+    max-width: 200px;
+    word-break: break-word;
+  }
+
+  .file-image {
+    height: auto;
+    max-width: 200px;
+  }
+
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    color: var(--link-color);
+    cursor: pointer;
+    display: block;
+    font-size: 1.75rem;
+    margin-inline: auto;
+
+    svg {
+      display: block;
+    }
+  }
+}

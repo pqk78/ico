@@ -23,7 +23,13 @@ export default function menu() {
       if (item.getAttribute('aria-selected') === 'true') {
         return;
       }
-      let options = await storage.getAll();
+      let options;
+      if (item.getAttribute('data-file') == 'files') {
+        options = await ico.getFiles();
+      }
+      else {
+        options = await storage.getAll();
+      }
       renderliquid(item.getAttribute('data-file'), options, document.getElementById('main-container'));
       menu.querySelector('[aria-selected="true"]').setAttribute('aria-selected', 'false');
       item.setAttribute('aria-selected', 'true');
