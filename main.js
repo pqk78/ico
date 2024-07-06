@@ -73,7 +73,7 @@ app.whenReady().then(() => {
   protocol.handle(systemfileProtocol, request => {
     const filePath = request.url.slice('systemfile://'.length)
     return net.fetch(`file://${filePath}`);
-  })
+  });
 
   createWindow();
   createTempDir();

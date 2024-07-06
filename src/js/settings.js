@@ -1,4 +1,3 @@
-import renderliquid from './renderliquid.js';
 export default function settings() {
   const form = document.getElementById('settings-form');
   const addSizeForm = document.getElementById('add-size--form');
@@ -81,7 +80,11 @@ export default function settings() {
     storage.restoreDefaults();
     storage.updateColorMode('dark'); // TO DO, get this from settings
     form.reset();
-    // window.location.reload();
+    liquid.render('settings').then((html) => {
+      document.getElementById('main-container').innerHTML = html;
+      settings();
+      window.global.callbacks.common();
+    });
   });
 
   addSizeSubmit && addSizeSubmit.addEventListener('click', e => {
