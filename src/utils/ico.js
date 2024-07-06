@@ -2,6 +2,27 @@ const fs = require('node:fs');
 const path = require('node:path');
 const sharp = require('sharp');
 
+const cleanTmpFiles = async age => {
+  age = parseInt(age)
+  if (age < 0) {
+    return;
+  }
+  if (age === 0) {
+    fs.rmSync(global.TMP_DIR, {recursive: true});
+    return;
+  }
+  let files = fs.readdirSync(global.TMP_DIR);
+  let date = new Date();
+  date.setDate(date.getDate() - parseInt(age));
+  files.forEach(file => {
+    let stat = fs.statSync(path.join(global.TMP_DIR, file));
+    let mtime = new Date(stat.mtime);
+    if (date > mtime) {
+      fs.rmSync(path.join(global.TMP_DIR, file));
+    }
+  })
+}
+
 const convert = async (image, options) => {
   let outmeta = {};
 
@@ -52,4 +73,4 @@ const getAll = () => {
   };
 }
 
-module.exports = { convert, deleteFile, getAll };
+module.exports = { cleanTmpFiles, convert, deleteFile, getAll };

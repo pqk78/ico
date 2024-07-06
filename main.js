@@ -3,7 +3,6 @@ const fs = require('node:fs');
 const ico = require('./src/utils/ico');
 const liquid = require('./src/utils/liquid');
 const path = require('node:path');
-const rimraf = require('rimraf');
 const url = require('node:url');
 
 const { buildTemplate } = require('./src/utils/menu');
@@ -82,7 +81,8 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  rimraf.sync(global.TMP_DIR, { preserveRoot: true });
+  let age = storage.get('settings.temp_files.schedule.value');
+  ico.cleanTmpFiles(age);
   if (process.platform !== 'darwin') {
     app.quit();
   };

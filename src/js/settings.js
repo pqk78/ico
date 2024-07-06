@@ -4,6 +4,7 @@ export default function settings() {
   const addSizeSubmit = document.getElementById('add-size--submit');
   const formats = document.querySelectorAll('input[name="format-selected"]');
   const colors = document.querySelectorAll('input[name="color-mode"]');
+  const tempFiles = document.querySelectorAll('input[name="temp-files"]');
   const sizes = document.querySelectorAll('input[name="size"]');
   const sizesSelected = document.querySelectorAll('input[name="size-selected"]');
   const resizes = document.querySelectorAll('input[name="resize"]');
@@ -60,6 +61,13 @@ export default function settings() {
       storage.updateColorMode(formData.get('color-mode'));
     })
   });
+
+  tempFiles.forEach(option => {
+    option.addEventListener('change', e => {
+      let formData = new FormData(form);
+      storage.update('settings.temp_files.schedule.value', formData.get('temp-files'));
+    })
+  })
 
   fits.forEach(fit => {
     fit.addEventListener('change', e => {

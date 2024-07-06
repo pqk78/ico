@@ -22,12 +22,12 @@
     },
     "temp_files": {
       "schedule": {
-        "value": "onclose",
+        "value": "0",
         "options": {
-          "onclose": "Each time I close the window",
+          "0": "Each time I close the window",
           "10": "After 10 days",
           "30": "After 30 days",
-          "manual": "Do not delete. I will delete them manually."
+          "-1": "Do not delete. I will delete them manually."
         }
       }
     },
