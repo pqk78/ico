@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const sharp = require('sharp');
+const JsZip = require("jszip");
 
 const cleanTmpFiles = async age => {
   age = parseInt(age)
@@ -56,7 +57,7 @@ const convert = async (image, options) => {
   return outmeta;
 }
 
-const deleteFile = async (file) => {
+const deleteFile = async file => {
   try {
     let filePath = path.join(global.TMP_DIR, file);
     fs.rmSync(filePath);
@@ -73,4 +74,21 @@ const getAll = () => {
   };
 }
 
-module.exports = { cleanTmpFiles, convert, deleteFile, getAll };
+const zip = async paths => {
+  let zip = new JsZip();
+  let folder = zip.folder('ICO Images');
+
+  paths.forEach(path => {
+    folder.file(path.fileName, fs.readFileSync(path.filePath), {
+      base64: true,
+    });
+  })
+
+  let zipFile = await zip.generateAsync({ type: 'nodebuffer'});
+
+  fs.writeFileSync(path.join(global.TMP_DIR, 'ICO_images.zip'), zipFile);
+
+  return path.join(global.TMP_DIR, 'ICO_images.zip');
+}
+
+module.exports = { cleanTmpFiles, convert, deleteFile, getAll, zip };

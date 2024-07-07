@@ -331,6 +331,28 @@
       margin: 0;
     }
   }
+
+  #download-wrapper {
+    flex-shrink: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .download-all {
+    align-items: center;
+    background-color: var(--link-color);
+    border: unset;
+    border-radius: .25rem;
+    color: var(--body-background);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-stack-body);
+    font-size: 1rem;
+    font-weight: 525;
+    gap: .75rem;
+    padding: .625rem 2rem;
+    text-transform: uppercase;
+  }
 }
 
 

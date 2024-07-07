@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('ico', {
   deleteFile: (file) => ipcRenderer.send('ico:delete-file', file),
   getFiles: () => ipcRenderer.invoke('ico:get-all'),
   onNavChange: (callback) => ipcRenderer.on('ico:nav', (e, file) => callback(file)),
+  zip: (paths) => ipcRenderer.invoke('ico:zip', paths),
 });
 
 contextBridge.exposeInMainWorld('liquid', {
