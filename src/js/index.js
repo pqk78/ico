@@ -3,6 +3,11 @@ export default function index() {
   const drag_area = document.getElementById('drag-area');
   const fileInput = document.getElementById('file');
   let imageList = [];
+
+  fileInput.addEventListener('change', e => {
+    fileInput.removeAttribute('invalid');
+    document.getElementById('file-input-feedback').textContent = '';
+  });
   
   const addFiles = files => {
     let images = Array.from(files).filter(file => {
@@ -58,6 +63,8 @@ export default function index() {
     drag_area.addEventListener('drop', e => {
       drag_area.classList.remove('drag-active');
       addFiles(e.dataTransfer.files);
+      fileInput.removeAttribute('invalid');
+      document.getElementById('file-input-feedback').textContent = '';
     })
   }
   
@@ -68,6 +75,14 @@ export default function index() {
   
   form && form.addEventListener('submit', async e => {
     e.preventDefault();
+    if (imageList.length == 0) {
+      fileInput.setAttribute('invalid', 'true')
+      document.getElementById('file-input-feedback').textContent = 'Please upload at least one image';
+      return;
+    }
+
+    document.querySelector('.form-output .output').innerHTML = '';
+
     imageList.forEach(image => {
       let data = new FormData(form);
       let formats = data.getAll('format');
