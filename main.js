@@ -71,6 +71,7 @@ app.whenReady().then(() => {
   ipcMain.handle('ico:get-all', event => ico.getAll());
   ipcMain.handle('ico:zip', (event, paths) => ico.zip(paths));
   ipcMain.handle('liquid:render', (event, file, options) => liquid.render(file, options));
+  ipcMain.handle('storage:get', (event, key) => storage.get(key));
   ipcMain.handle('storage:get-all', () => storage.getAll() );
   protocol.handle(systemfileProtocol, request => {
     const filePath = request.url.slice('systemfile://'.length)

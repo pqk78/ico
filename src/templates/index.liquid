@@ -31,32 +31,33 @@
         </fieldset>
         <fieldset class="fieldset">
           <legend class="fieldset-legend">Scale</legend>
-          {% for size in settings.scale %}
-          {% if size[1] %}
+          {% assign sortedscales = settings.scale | sortsizes %}
+          {% for size in sortedscales %}
+          {% if settings.scale[size] %}
           {% assign checked = 'checked' %}
           {% else %}
           {% assign checked = '' %}
           {% endif %}
-          <label for="scale--{{ size[0] }}" class="checkbox-label">
-            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}"
+          <label for="scale--{{ size }}" class="checkbox-label">
+            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size }}" value="{{ size }}"
               {{ checked }}>
-            <span class="checkbox-text">{{ size[0] | replace: 'auto', 'Original size' }}{% unless size[0] == "auto"
-              %}px{% endunless %}</span>
+            <span class="checkbox-text">{{ size | replace: 'auto', 'Original size' }}{% unless size == "auto" %}px{% endunless %}</span>
           </label>
           {% endfor %}
         </fieldset>
         <fieldset class="fieldset">
           <legend class="fieldset-legend">Resize</legend>
-          {% for size in settings.resize %}
-          {% if size[1] %}
+          {% assign sortedsizes = settings.resize | sortsizes %}
+          {% for size in sortedsizes %}
+          {% if settings.resize[size] %}
           {% assign checked = 'checked' %}
           {% else %}
           {% assign checked = '' %}
           {% endif %}
-          <label for="scale--{{ size[0] }}" class="checkbox-label">
-            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size[0] }}" value="{{ size[0] }}"
+          <label for="scale--{{ size }}" class="checkbox-label">
+            <input class="visually-hidden" type="checkbox" name="size" id="scale--{{ size }}" value="{{ size }}"
               {{ checked }}>
-            <span class="checkbox-text">{{ size[0]}}</span>
+            <span class="checkbox-text">{{ size }}</span>
           </label>
           {% endfor %}
         </fieldset>

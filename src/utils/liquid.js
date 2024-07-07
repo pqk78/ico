@@ -28,6 +28,28 @@ const render = async (file, options = storage.getAll()) => {
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
   });
 
+  engine.registerFilter('sortsizes', (sizes) => {
+    console.log('sortsizes called')
+    let sortable = [];
+    for (const [size, val] of Object.entries(sizes)) {
+      sortable.push(size);
+    }
+    
+    sortable.sort((a,b) => {
+      a = a.split('x');
+      b = b.split('x');
+        
+      if (a[0] == b[0]) {
+        return a.length > 1 ? parseInt(a[1]) - parseInt(b[1]) : 0;
+      }
+      return parseInt(a[0]) - parseInt(b[0]);
+    });
+
+    console.log(sortable)
+
+    return sortable;
+  });
+
   engine.registerTag('markdown', {
     parse(tagToken, remainTokens) {
       this.tpls = [];

@@ -50,31 +50,34 @@
             </tr>
           </thead>
           <tbody>
-            {% for size in settings.scale %}
-            {% if size[1] %}
+            {% assign sortedscales = settings.scale | sortsizes %}
+            {% for size in sortedscales %}
+            {% if settings.scale[size] %}
             {% assign checked = 'checked' %}
             {% else %}
             {% assign checked = '' %}
             {% endif %}
             <tr>
-              <th scope="row" id="size-{{ forloop.index }}">{{ size[0] | replace: 'auto', 'Original Size' }}</th>
+              <th scope="row" id="size-{{ forloop.index }}">{{ size | replace: 'auto', 'Original Size' }}</th>
               <td>
                 <input type="checkbox" class="toggle" id="size-{{ forloop.index }}-selected" name="size-selected"
                   {{checked}} aria-label="Checked by default" aria-describedby="size-{{ forloop.index }}"
-                  data-size="settings.scale.{{ size[0] }}">
+                  data-size="settings.scale.{{ size }}">
               </td>
               <td>
+                {% unless size == 'auto' %}
                 <button class="edit" aria-label="Edit the size" title="Edit" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                       d="m5 16l-1 4l4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0zM15 6l3 3m-5 11h8" />
                   </svg>
                 </button>
+                {% endunless %}
               </td>
               <td>
-                {% unless size[0] == 'auto' %}
+                {% unless size == 'auto' %}
                 <button class="delete" aria-label="Delete size" title="Delete" type="button"
-                  data-size="settings.scale.{{ size[0] }}">
+                  data-size="settings.scale.{{ size }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
                     <path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8" />
                     <path fill="none" d="M292 64h-72a4 4 0 0 0-4 4v28h80V68a4 4 0 0 0-4-4" />
@@ -101,18 +104,19 @@
             </tr>
           </thead>
           <tbody>
-            {% for size in settings.resize %}
-            {% if size[1] %}
+            {% assign sortedsizes = settings.resize | sortsizes %}
+            {% for size in sortedsizes %}
+            {% if settings.resize[size] %}
             {% assign checked = 'checked' %}
             {% else %}
             {% assign checked = '' %}
             {% endif %}
             <tr>
-              <th scope="row" id="size-{{ forloop.index }}">{{ size[0] | replace: 'auto', 'Original Size' }}</th>
+              <th scope="row" id="size-{{ forloop.index }}">{{ size | replace: 'auto', 'Original Size' }}</th>
               <td>
                 <input type="checkbox" class="toggle" id="size-{{ forloop.index }}-selected" name="resize-selected"
                   {{checked}} aria-label="Checked by default" aria-describedby="size-{{ forloop.index }}"
-                  data-size="settings.resize.{{ size[0] }}">
+                  data-size="settings.resize.{{ size }}">
               </td>
               <td>
                 <button class="edit" aria-label="Edit the size" title="Edit" type="button">
@@ -124,7 +128,7 @@
               </td>
               <td>
                 <button class="delete" aria-label="Delete size" title="Delete" type="button"
-                  data-size="settings.resize.{{ size[0] }}">
+                  data-size="settings.resize.{{ size }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
                     <path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8" />
                     <path fill="none" d="M292 64h-72a4 4 0 0 0-4 4v28h80V68a4 4 0 0 0-4-4" />

@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld('liquid', {
 })
 
 contextBridge.exposeInMainWorld('storage', {
+  get: (key) => ipcRenderer.invoke('storage:get', key),
   getAll: () => ipcRenderer.invoke('storage:get-all'),
   restoreDefaults: () => ipcRenderer.send('storage:restore-defaults'),
   unset: (key) => ipcRenderer.send('storage:unset', key),

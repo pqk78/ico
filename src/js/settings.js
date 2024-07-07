@@ -95,12 +95,27 @@ export default function settings() {
     });
   });
 
-  addSizeSubmit && addSizeSubmit.addEventListener('click', e => {
+  addSizeSubmit && addSizeSubmit.addEventListener('click', async e => {
     // TO DO Validate input
     const feedback = document.getElementById('add-size--feedback');
     let size = document.getElementById('add-size--size').value.replaceAll('px', '');
-    let key = size.indexOf('x') == -1 ? `settings.scale.${size}` : `settings.resize.${size}`;
-    let val = document.getElementById('add-size--selected').checked;
+    let key, val;
+    if (size.indexOf('x') == -1) {
+      key = `settings.scale.${size}`;
+      val = document.getElementById('add-size--selected').checked;
+    }
+    else {
+      let sizes = await storage.get('settings.resize');
+      console.log(sizes)
+      sizes[size] = document.getElementById('add-size--selected').checked;
+      console.log(sizes)
+      // sizes.push({size: document.getElementById('add-size--selected').checked});
+
+      key = 'settings.resize',
+      val = sizes;
+    }
+    // key = size.indexOf('x') == -1 ? `settings.scale.${size}` : `settings.resize.${size}`;
+    // val = document.getElementById('add-size--selected').checked;
 
     feedback && (feedback.innerHTML = '&nbsp;');
     try {
