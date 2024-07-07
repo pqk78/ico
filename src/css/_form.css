@@ -73,6 +73,16 @@
     }
   }
 
+  &.settings-form {
+    tr {
+      box-shadow: none;
+      transition: box-shadow 1s ease;
+      &.added-new {
+        box-shadow: 0 0 4px 4px var(--link-color);
+      }
+    }
+  }
+
   h2 {
     font-family: var(--font-stack-body);
     font-size: 1.25rem;
