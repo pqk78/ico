@@ -83,6 +83,20 @@ export default function index() {
 
     document.querySelector('.form-output .output').innerHTML = '<p id="download-wrapper"></p>';
 
+    let dl = document.createElement('button');
+    dl.setAttribute('type', 'button');
+    dl.className = 'download-all';
+    dl.paths = [];
+    dl.innerHTML = 'Download All <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-8 4v-5h2v3h12v-3h2v5z"/></svg>';
+    dl.addEventListener('click', async e => {
+      let zipPath = await ico.zip(dl.paths);
+      let a = document.createElement('a');
+      a.href = zipPath;
+      a.download = 'ICO_images.zip';
+      a.click();
+    })
+    document.getElementById('download-wrapper').appendChild(dl);
+
     imageList.forEach(image => {
       let data = new FormData(form);
       let formats = data.getAll('format');
@@ -99,20 +113,6 @@ export default function index() {
       if (!sizes?.length) {
         sizes = ['auto'];
       }
-  
-      let dl = document.createElement('button');
-      dl.setAttribute('type', 'button');
-      dl.className = 'download-all';
-      dl.paths = [];
-      dl.innerHTML = 'Download All <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-8 4v-5h2v3h12v-3h2v5z"/></svg>';
-      dl.addEventListener('click', async e => {
-        let zipPath = await ico.zip(dl.paths);
-        let a = document.createElement('a');
-        a.href = zipPath;
-        a.download = 'ICO_images.zip';
-        a.click();
-      })
-      document.getElementById('download-wrapper').appendChild(dl)
 
       formats.forEach(format => {
         sizes.forEach(size => {
