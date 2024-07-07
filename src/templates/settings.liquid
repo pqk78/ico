@@ -45,7 +45,7 @@
             <tr>
               <th scope="col">Width</th>
               <th scope="col">Checked by default</th>
-              <th scope="col">Edit</th>
+              {% comment %}<th scope="col">Edit</th>{% endcomment %}
               <th scope="col">Delete</th>
             </tr>
           </thead>
@@ -64,6 +64,8 @@
                   {{checked}} aria-label="Checked by default" aria-describedby="size-{{ forloop.index }}"
                   data-size="settings.scale.{{ size }}">
               </td>
+              {% comment %}
+              Disabled
               <td>
                 {% unless size == 'auto' %}
                 <button class="edit" aria-label="Edit the size" title="Edit" type="button">
@@ -74,6 +76,7 @@
                 </button>
                 {% endunless %}
               </td>
+              {% endcomment %}
               <td>
                 {% unless size == 'auto' %}
                 <button class="delete" aria-label="Delete size" title="Delete" type="button"
@@ -99,7 +102,7 @@
             <tr>
               <th scope="col">Dimensions</th>
               <th scope="col">Checked by default</th>
-              <th scope="col">Edit</th>
+              {%  comment  %}<th scope="col">Edit</th>{% endcomment %}
               <th scope="col">Delete</th>
             </tr>
           </thead>
@@ -118,6 +121,8 @@
                   {{checked}} aria-label="Checked by default" aria-describedby="size-{{ forloop.index }}"
                   data-size="settings.resize.{{ size }}">
               </td>
+              {% comment %}
+              Disabled
               <td>
                 <button class="edit" aria-label="Edit the size" title="Edit" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -126,6 +131,7 @@
                   </svg>
                 </button>
               </td>
+              {% endcomment %}
               <td>
                 <button class="delete" aria-label="Delete size" title="Delete" type="button"
                   data-size="settings.resize.{{ size }}">
