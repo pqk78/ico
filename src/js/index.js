@@ -96,6 +96,9 @@ export default function index() {
       if (!formats?.length) {
         formats = ['auto'];
       }
+      if (!sizes?.length) {
+        sizes = ['auto'];
+      }
   
       formats.forEach(format => {
         sizes.forEach(size => {
