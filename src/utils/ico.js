@@ -68,7 +68,6 @@ const deleteFile = async file => {
 
 const getAll = () => {
   let files = fs.readdirSync(global.TMP_DIR).reduce((out, file) => {
-    console.log(out)
     if (!file.includes('.zip')) {
       out.push(path.parse(file));
     }
