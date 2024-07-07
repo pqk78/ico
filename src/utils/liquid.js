@@ -29,7 +29,6 @@ const render = async (file, options = storage.getAll()) => {
   });
 
   engine.registerFilter('sortsizes', (sizes) => {
-    console.log('sortsizes called')
     let sortable = [];
     for (const [size, val] of Object.entries(sizes)) {
       sortable.push(size);
@@ -44,8 +43,6 @@ const render = async (file, options = storage.getAll()) => {
       }
       return parseInt(a[0]) - parseInt(b[0]);
     });
-
-    console.log(sortable)
 
     return sortable;
   });
