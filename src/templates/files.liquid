@@ -2,7 +2,7 @@
 <div class="file-list">
   {% for file in options.files %}
     <div class="file">
-      <img src="systemfile://{{ options.path }}/{{ file.base }}" class="file-image" alt="">
+      <img src="systemfile://{{ options.path }}/{{ file.base }}?c={{ 'now' | date: "%Y%m%dT%H%M%S" }}" class="file-image" alt="">
       <div class="file-text">
         <span class="file-name">{{ file.base }}</span>
         <span class="delete">

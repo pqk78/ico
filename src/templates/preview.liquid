@@ -19,7 +19,7 @@
     <p>Loading...</p>
   </div>
 {% else %}
-  <img src="systemfile://{{ options.info.filePath }}" class="preview-image" alt="">
+  <img src="systemfile://{{ options.info.filePath }}?c={{ 'now' | date: "%Y%m%dT%H%M%S" }}" class="preview-image" alt="">
   <p>{{ options.info.info.format | replace: 'heif', 'avif' | upcase }}</p>
   <p>{{ options.info.info.width }} x {{ options.info.info.height }}</p>
   <p>{{ options.info.info.size | formatsize }}</p>
