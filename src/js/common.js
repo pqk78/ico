@@ -2,6 +2,7 @@ export default function common() {
   const scripts = document.querySelectorAll('script');
   const dialogClose = document.querySelectorAll('.dialog-close');
   const dialogOpen = document.querySelectorAll('.dialog-open');
+  const links = document.querySelectorAll('a[href]');
   const tabContent = document.querySelectorAll('.tabs');
   const close = e => {
     e.currentTarget.dialog.close();
@@ -39,6 +40,14 @@ export default function common() {
   dialogClose.forEach(trigger => {
     trigger.dialog = trigger.closest('dialog');
     trigger.addEventListener('click', close)
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      console.log('click', link.href)
+      e.preventDefault();
+      ico.openLink(link.href);
+    });
   })
 
   tabContent.forEach(content => {
@@ -46,5 +55,5 @@ export default function common() {
     tabs.forEach(tab => {
       tab.addEventListener('click', tabsUpdate);
     })
-  })
+  });
 }

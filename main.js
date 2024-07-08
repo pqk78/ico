@@ -1,9 +1,8 @@
-const { app, BrowserWindow, ipcMain, Menu, nativeTheme, net, protocol, remote } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, nativeTheme, net, protocol, shell } = require('electron');
 const fs = require('node:fs');
 const ico = require('./src/utils/ico');
 const liquid = require('./src/utils/liquid');
 const path = require('node:path');
-const url = require('node:url');
 
 const { buildTemplate } = require('./src/utils/menu');
 const defaultSettings = require('./src/utils/settings.json');
@@ -17,6 +16,10 @@ const createTempDir = () => {
   fs.mkdir(global.TMP_DIR, { recursive: true }, err => {
     err && console.error('Problem creating temp dir', err);
   });
+}
+
+const openLink = link => {
+  shell.openExternal(link);
 }
 
 const updateColorMode = (event, mode) => {
@@ -52,6 +55,7 @@ const createWindow = () => {
   nativeTheme.themeSource = storage.get('settings.theme.mode.value');
 
   ipcMain.on('ico:delete-file', (event, file) => { ico.deleteFile(file) });
+  ipcMain.on('ico:open-link', (event, link) => { openLink(link) });
   ipcMain.on('storage:restore-defaults', event => { storage.restoreDefaults() });
   ipcMain.on('storage:unset', (event, key) => { storage.unset(key) });
   ipcMain.on('storage:update', (event, key, value) => { storage.set(key, value) });
