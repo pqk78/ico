@@ -4,7 +4,9 @@ const path = require('node:path');
 
 module.exports = {
   packagerConfig: {
-    asar: true,
+    asar: {
+      unpackDir: path.join('**', 'node_modules', '{sharp,@img', '**', '*'),
+    },
     icon: './src/images/logo-dark',
     
     extraResource: [
