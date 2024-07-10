@@ -3,6 +3,7 @@ import common from './common.js';
 import files from './files.js';
 import index from './index.js';
 import menu from './menu.js';
+import { loadPage } from './menu.js';
 import settings from './settings.js';
 
 window.global = {
@@ -23,9 +24,5 @@ document.addEventListener('DOMContentLoaded', async e => {
     });
   });
 
-  ico.onNavChange(file => {
-    renderliquid(file, options, document.getElementById('main-container'));
-    document.querySelector(`.menu-item[aria-selected="true"]`).setAttribute('aria-selected', 'false');
-    document.querySelector(`.menu-item[data-file="${file}"]`).setAttribute('aria-selected', 'true');
-  })
+  ico.onNavChange(loadPage);
 });

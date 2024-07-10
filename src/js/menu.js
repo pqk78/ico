@@ -20,19 +20,18 @@ export default function menu() {
   menuItems && menuItems.forEach(item => {
     item.addEventListener('click', async e => {
       e.preventDefault();
-      if (item.getAttribute('aria-selected') === 'true') {
-        return;
-      }
-      let options;
-      if (item.getAttribute('data-file') == 'files') {
-        options = await ico.getFiles();
-      }
-      else {
-        options = await storage.getAll();
-      }
-      renderliquid(item.getAttribute('data-file'), options, document.getElementById('main-container'));
-      menu.querySelector('[aria-selected="true"]').setAttribute('aria-selected', 'false');
-      item.setAttribute('aria-selected', 'true');
+      loadPage(item.getAttribute('data-file'));
     });
   });
+}
+
+export async function loadPage(file) {
+  if (document.querySelector(`.menu-item[data-file="${file}"]`).getAttribute('aria-selected') == 'true') {
+    return;
+  }
+  let options = file == 'files' ? await ico.getFiles() : await storage.getAll();
+  renderliquid(file, options, document.getElementById('main-container'));
+  document.querySelector(`.menu-item[aria-selected="true"]`).setAttribute('aria-selected', 'false');
+  document.querySelector(`.menu-item[data-file="${file}"]`).setAttribute('aria-selected', 'true');
+  document.title = file == 'index' ? `Image Converter and Optimizer` : `${file.charAt(0).toUpperCase() + file.slice(1)} | Image Converter and Optimizer`;
 }
