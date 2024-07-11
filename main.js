@@ -70,6 +70,13 @@ const createWindow = () => {
   win.loadFile('./src/index.html');
 }
 
+app.setAboutPanelOptions({
+  applicationName: 'Image Converter and Optimizer',
+  applicationVersion: '0.1.0',
+  copyright: `Copyright (c) 2024 Maz Planchak`,
+  iconPath: './src/images/logo.svg',
+});
+
 app.whenReady().then(() => {
   ipcMain.handle('ico:convert', (event, image, options) => ico.convert(image, options));
   ipcMain.handle('ico:get-all', event => ico.getAll());
