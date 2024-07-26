@@ -39,7 +39,8 @@ const convert = async (image, options) => {
       width: options.resize[0],
       fit: options.fit,
       position: options.position == 'entropy' ? sharp.strategy.entropy : options.position == 'attention' ? sharp.strategy.attention : options.position,
-      background: options.background
+      quality: 80,
+      background: options.background,
     };
     if (options.resize.length > 1) {
       data.height = options.resize[1];
@@ -51,7 +52,14 @@ const convert = async (image, options) => {
   else {
     let outFileName = outmeta.fileName = `${imagePath.name}${imagePath.ext}${ext}`;
     let outFilePath = outmeta.filePath = path.join(global.TMP_DIR, outFileName);
-    outmeta.info = await sharp(image).toFile(outFilePath);
+    switch (options.format) {
+      case 'avif':
+        outmeta.info = await sharp(image).avif({quality: 80}).toFile(outFilePath);
+        break;
+      default:
+        outmeta.info = await sharp(image).toFile(outFilePath);
+        break;
+    }
   }
 
   return outmeta;
