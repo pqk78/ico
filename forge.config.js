@@ -8,7 +8,6 @@ module.exports = {
       unpackDir: path.join('**', 'node_modules', '{sharp,@img}', '**', '*'),
     },
     icon: './src/images/logo-dark',
-    
     extraResource: [
       './src/templates/files.liquid',
       './src/templates/help.liquid',
@@ -17,6 +16,14 @@ module.exports = {
       './src/templates/preview.liquid',
       './src/templates/settings.liquid',
     ],
+    osxSign: {
+      optionsForFile: (filePath) => { 
+        return { entitlements: './entitlements.plist' };
+      }
+    },
+    osxNotarize: {
+      keychainProfile: 'com-panqike-ico',
+    },
   },
   rebuildConfig: {},
   makers: [
@@ -28,13 +35,13 @@ module.exports = {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
     },
-    {
-      name: '@electron-forge/maker-dmg',
-      config: {
-        name: 'ICO',
-        icon: './src/images/logo-dark.icns',
-      }
-    },
+    // {
+    //   name: '@electron-forge/maker-dmg',
+    //   config: {
+    //     name: 'ICO',
+    //     icon: './src/images/logo-dark.icns',
+    //   }
+    // },
     {
       name: '@electron-forge/maker-deb',
       config: {},
